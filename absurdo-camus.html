@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El absurdo y la rebelión — Jorge Romano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0a0805;--void-mid:#13100c;--void-soft:#1e1a14;
+  --ink:#f0ebe0;--ink-soft:rgba(240,235,224,0.6);--ink-faint:rgba(240,235,224,0.32);
+  --gold:#c4903a;--gold-light:#e8c97a;
+  --terra:#a0522d;--terra-light:#d4845a;--terra-pale:rgba(160,82,45,0.15);
+  --amber:#c87941;--amber-light:#e8a96a;
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.78;overflow-x:hidden}
+
+/* HERO — amanecer argelino, luz cálida rasante */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:100px 40px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-sky{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 100%,rgba(160,82,45,0.3) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 85%,rgba(200,121,65,0.2) 0%,transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 70%,rgba(232,169,106,0.1) 0%,transparent 45%),
+    radial-gradient(ellipse 30% 20% at 80% 20%,rgba(196,144,58,0.05) 0%,transparent 40%);
+}
+/* horizonte */
+.horizon{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,rgba(200,121,65,0.4),transparent)}
+
+.hero-eyebrow{
+  font-family:var(--sans);font-size:9px;font-weight:500;
+  letter-spacing:0.28em;text-transform:uppercase;color:var(--amber-light);
+  margin-bottom:36px;display:flex;align-items:center;gap:16px;position:relative;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:36px;height:1px;background:rgba(200,121,65,0.4)}
+
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:400;line-height:1.05;letter-spacing:-0.02em;
+  max-width:700px;margin:0 auto 16px;position:relative;
+}
+.hero h1 .word-absurdo{color:var(--ink)}
+.hero h1 em{font-style:italic;color:var(--amber-light)}
+
+.hero-sub{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(200,121,65,0.45);margin-bottom:40px;
+}
+.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--amber),transparent);margin:0 auto 40px}
+.hero-desc{
+  font-family:var(--body);font-size:clamp(1rem,2vw,1.2rem);
+  font-style:italic;color:var(--ink-soft);max-width:560px;margin:0 auto;line-height:1.7;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(200,121,65,0.3);
+}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(200,121,65,0.3),transparent)}
+
+/* CONTENT */
+.content{max-width:760px;margin:0 auto;padding:80px 32px 120px}
+.chapter{margin-bottom:80px}
+.chapter-num{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);
+  display:block;margin-bottom:12px;
+}
+.chapter h2{
+  font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.3rem);
+  font-weight:400;color:var(--ink);line-height:1.18;
+  margin-bottom:28px;letter-spacing:-0.01em;
+}
+.chapter h2 em{font-style:italic;color:var(--amber-light)}
+.chapter p{color:var(--ink-soft);margin-bottom:18px;line-height:1.78}
+.chapter p strong{color:var(--ink);font-weight:500}
+
+.inline-quote{
+  border-left:2px solid var(--amber);
+  padding:4px 0 4px 24px;margin:28px 0;
+  font-family:var(--body);font-style:italic;
+  font-size:1.05rem;color:var(--ink-faint);line-height:1.6;
+}
+
+/* ILUSTRACIÓN SÍSIFO */
+.ilustracion{margin:40px 0;border-radius:4px;overflow:hidden;background:var(--void-soft)}
+
+/* TRIÁNGULO DEL ABSURDO */
+.triangulo{
+  background:var(--void-mid);border:1px solid rgba(200,121,65,0.12);
+  border-radius:4px;overflow:hidden;margin:32px 0;
+}
+
+/* TRES SALIDAS */
+.salidas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(200,121,65,0.1);border:1px solid rgba(200,121,65,0.1);border-radius:4px;overflow:hidden;margin:32px 0}
+.salida{background:var(--void-mid);padding:28px 22px;position:relative}
+.salida-num{
+  font-family:var(--serif);font-size:3rem;font-style:italic;
+  color:rgba(200,121,65,0.08);position:absolute;top:12px;right:16px;line-height:1;
+}
+.salida-tag{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;display:block;margin-bottom:12px}
+.salida:nth-child(1) .salida-tag{color:rgba(200,100,100,0.7)}
+.salida:nth-child(2) .salida-tag{color:rgba(200,100,100,0.7)}
+.salida:nth-child(3) .salida-tag{color:var(--amber)}
+.salida h3{font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:10px;line-height:1.25}
+.salida p{font-size:0.85rem;line-height:1.65;color:var(--ink-faint);margin:0}
+.salida:nth-child(3){background:var(--void-soft)}
+
+/* PULLQUOTE */
+.pullquote{
+  text-align:center;padding:68px 32px;margin:72px 0;
+  border-top:1px solid rgba(200,121,65,0.2);
+  border-bottom:1px solid rgba(200,121,65,0.2);position:relative;
+}
+.pullquote-bg{
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:10rem;color:rgba(200,121,65,0.05);
+  line-height:0.8;pointer-events:none;width:100%;text-align:center;
+}
+.pullquote p{
+  font-family:var(--serif);font-size:clamp(1.2rem,3vw,1.75rem);
+  font-style:italic;font-weight:400;line-height:1.45;
+  color:var(--ink);max-width:580px;margin:0 auto 20px;position:relative;
+}
+.pullquote cite{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);font-style:normal}
+
+/* VOCES */
+.voces{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(200,121,65,0.1);border:1px solid rgba(200,121,65,0.1);border-radius:4px;overflow:hidden;margin:32px 0}
+.voz{background:var(--void-mid);padding:28px 24px}
+.voz-name{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--ink);display:block;margin-bottom:3px}
+.voz-dates{font-family:var(--sans);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);opacity:0.6;display:block;margin-bottom:12px}
+.voz p{font-size:0.86rem;color:var(--ink-faint);line-height:1.6;margin:0}
+
+/* REBELIÓN BOX */
+.rebelion{
+  background:var(--void-soft);border:1px solid rgba(200,121,65,0.2);
+  border-left:2px solid var(--amber);
+  border-radius:4px;padding:40px 36px;margin:32px 0;position:relative;overflow:hidden;
+}
+.rebelion::before{
+  content:'✶';position:absolute;right:28px;top:50%;transform:translateY(-50%);
+  font-size:7rem;color:rgba(200,121,65,0.04);line-height:1;pointer-events:none;
+}
+.rebelion h3{font-family:var(--serif);font-size:1.3rem;color:var(--amber-light);margin-bottom:16px;font-weight:400;font-style:italic}
+.rebelion p{font-size:0.95rem;color:var(--ink-faint);line-height:1.72;margin-bottom:12px}
+.rebelion p:last-child{margin:0}
+.rebelion strong{color:var(--ink);font-weight:500}
+
+/* CLOSING */
+.closing{text-align:center;padding:72px 32px;border-top:1px solid rgba(200,121,65,0.15);margin-top:80px}
+.closing-glyph{font-family:var(--serif);font-size:3.5rem;color:rgba(200,121,65,0.2);display:block;margin-bottom:28px;line-height:1}
+.closing h2{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;font-style:italic;color:var(--ink);max-width:560px;margin:0 auto 24px;line-height:1.25}
+.closing p{font-family:var(--body);font-style:italic;font-size:1.05rem;color:var(--ink-faint);max-width:480px;margin:0 auto 14px;line-height:1.7}
+.closing strong{color:var(--amber-light);font-weight:400}
+
+.back{display:block;text-align:center;margin-top:56px;font-family:var(--sans);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(200,121,65,0.35);text-decoration:none;transition:color 0.3s}
+.back:hover{color:var(--amber)}
+.back::before{content:'← '}
+
+footer{text-align:center;padding:36px;font-family:var(--sans);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(200,121,65,0.2);border-top:1px solid rgba(255,255,255,0.03)}
+
+@media(max-width:640px){
+  .salidas,.voces{grid-template-columns:1fr}
+  .hero{padding:80px 24px 70px}
+  .content{padding:60px 20px 80px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-sky"></div>
+  <div class="horizon"></div>
+
+  <span class="hero-eyebrow">Albert Camus · El absurdo · La rebelión</span>
+  <h1>El absurdo<br>como forma de<br><em>estar vivo</em></h1>
+  <p class="hero-sub">El mito de Sísifo — Albert Camus, 1942</p>
+  <div class="hero-line"></div>
+  <p class="hero-desc">
+    El universo no responde. Nunca respondió. Y sin embargo, cada mañana nos levantamos y le seguimos preguntando. Ahí, exactamente ahí, nace el absurdo.
+  </p>
+  <div class="hero-scroll"><div class="scroll-line"></div>Descender</div>
+</header>
+
+<main class="content">
+
+  <!-- ILUSTRACIÓN SÍSIFO -->
+  <div class="ilustracion">
+    <svg viewBox="0 0 760 260" width="100%" role="img" aria-label="Sísifo empujando la roca cuesta arriba, eternamente">
+      <title>Sísifo y la roca — El absurdo eterno</title>
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0a0805"/>
+          <stop offset="60%" stop-color="#1a1008"/>
+          <stop offset="100%" stop-color="#2a1a0a"/>
+        </linearGradient>
+        <linearGradient id="hillgrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a2a18"/>
+          <stop offset="100%" stop-color="#1a1008"/>
+        </linearGradient>
+        <linearGradient id="sungrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8a96a" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#c87941" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="760" height="260" fill="url(#sky)"/>
+      <!-- sol rasante en el horizonte -->
+      <ellipse cx="380" cy="200" rx="280" ry="40" fill="url(#sungrad)"/>
+      <ellipse cx="380" cy="205" rx="80" ry="12" fill="rgba(200,121,65,0.15)"/>
+      <!-- montaña / colina -->
+      <path d="M0,260 L0,180 Q100,120 200,140 Q300,160 380,80 Q460,0 520,60 Q580,120 640,100 Q700,80 760,110 L760,260 Z" fill="url(#hillgrad)"/>
+      <!-- camino de la roca — línea de pendiente -->
+      <path d="M180,220 Q300,140 430,75" fill="none" stroke="rgba(200,121,65,0.15)" stroke-width="1" stroke-dasharray="3,5"/>
+      <!-- roca -->
+      <ellipse cx="400" cy="85" rx="22" ry="18" fill="#3a2a18" stroke="rgba(200,121,65,0.35)" stroke-width="1"/>
+      <ellipse cx="395" cy="80" rx="8" ry="5" fill="rgba(200,121,65,0.1)"/>
+      <!-- figura de Sísifo — esquemática y elegante -->
+      <!-- cuerpo -->
+      <line x1="360" y1="130" x2="355" y2="165" stroke="rgba(240,235,224,0.5)" stroke-width="2" stroke-linecap="round"/>
+      <!-- cabeza -->
+      <circle cx="362" cy="124" r="7" fill="none" stroke="rgba(240,235,224,0.4)" stroke-width="1.5"/>
+      <!-- brazo izquierdo hacia la roca -->
+      <line x1="360" y1="135" x2="378" y2="110" stroke="rgba(240,235,224,0.45)" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- brazo derecho -->
+      <line x1="360" y1="135" x2="342" y2="120" stroke="rgba(240,235,224,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- piernas -->
+      <line x1="355" y1="165" x2="340" y2="195" stroke="rgba(240,235,224,0.45)" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="355" y1="165" x2="368" y2="190" stroke="rgba(240,235,224,0.4)" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- estrellas / puntos de luz -->
+      <circle cx="80" cy="40" r="1" fill="rgba(240,235,224,0.3)"/>
+      <circle cx="150" cy="25" r="0.8" fill="rgba(240,235,224,0.2)"/>
+      <circle cx="600" cy="35" r="1.2" fill="rgba(240,235,224,0.25)"/>
+      <circle cx="680" cy="20" r="0.8" fill="rgba(240,235,224,0.2)"/>
+      <circle cx="50" cy="70" r="0.6" fill="rgba(240,235,224,0.15)"/>
+      <circle cx="720" cy="55" r="1" fill="rgba(240,235,224,0.2)"/>
+      <!-- texto -->
+      <text x="380" y="248" font-family="EB Garamond, serif" font-size="11" fill="rgba(200,121,65,0.35)" text-anchor="middle" font-style="italic" letter-spacing="2">hay que imaginarse a Sísifo feliz</text>
+    </svg>
+  </div>
+
+  <!-- I -->
+  <section class="chapter">
+    <span class="chapter-num">I — El punto de partida</span>
+    <h2>¿Qué es,<br>exactamente, <em>el absurdo?</em></h2>
+    <p>
+      Camus no inventó una idea abstracta. Partió de una experiencia concreta, visceral, que cualquier ser humano reconoce si es honesto consigo mismo: hay momentos en que la vida pierde sentido de golpe. Un martes cualquiera, sin motivo aparente. El mundo sigue girando pero vos te quedás ahí, mirando, preguntándote <em>para qué.</em>
+    </p>
+    <p>
+      A eso Camus lo llamó <strong>la sensación de lo absurdo.</strong> No es una conclusión filosófica — es una experiencia previa a cualquier razonamiento. La filosofía viene después, intentando dar nombre a algo que el cuerpo ya sabía.
+    </p>
+    <p>
+      Pero el absurdo, para Camus, no reside ni en el hombre ni en el mundo por separado. Reside en la <strong>tensión entre los dos.</strong> En el choque entre nuestra necesidad de sentido y el silencio absoluto del universo ante esa necesidad.
+    </p>
+
+    <div class="inline-quote">
+      "El absurdo nace del enfrentamiento entre la llamada humana y el silencio irrazonable del mundo."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Albert Camus, El mito de Sísifo, 1942</small>
+    </div>
+
+    <!-- TRIÁNGULO SVG -->
+    <div class="triangulo">
+      <svg viewBox="0 0 760 220" width="100%" role="img" aria-label="Los tres vértices del absurdo: el hombre, el mundo y la tensión entre ambos">
+        <title>El triángulo del absurdo</title>
+        <rect width="760" height="220" fill="#13100c"/>
+        <!-- triángulo -->
+        <polygon points="380,30 620,185 140,185" fill="none" stroke="rgba(200,121,65,0.2)" stroke-width="0.8"/>
+        <!-- vértice superior: el hombre -->
+        <circle cx="380" cy="30" r="5" fill="rgba(200,121,65,0.5)"/>
+        <text x="380" y="18" font-family="Inter,sans-serif" font-size="9" fill="rgba(200,121,65,0.6)" text-anchor="middle" letter-spacing="2" font-weight="600">EL HOMBRE</text>
+        <text x="380" y="8" font-family="EB Garamond,serif" font-size="11" fill="rgba(240,235,224,0.3)" text-anchor="middle" font-style="italic">necesidad de sentido</text>
+        <!-- vértice inferior derecho: el mundo -->
+        <circle cx="620" cy="185" r="5" fill="rgba(200,121,65,0.3)"/>
+        <text x="650" y="190" font-family="Inter,sans-serif" font-size="9" fill="rgba(200,121,65,0.5)" text-anchor="start" letter-spacing="2" font-weight="600">EL MUNDO</text>
+        <text x="650" y="202" font-family="EB Garamond,serif" font-size="11" fill="rgba(240,235,224,0.25)" text-anchor="start" font-style="italic">silencio irracional</text>
+        <!-- vértice inferior izquierdo: el absurdo -->
+        <circle cx="140" cy="185" r="5" fill="rgba(232,169,106,0.6)"/>
+        <text x="110" y="190" font-family="Inter,sans-serif" font-size="9" fill="rgba(232,169,106,0.7)" text-anchor="end" letter-spacing="2" font-weight="600">EL ABSURDO</text>
+        <text x="110" y="202" font-family="EB Garamond,serif" font-size="11" fill="rgba(240,235,224,0.3)" text-anchor="end" font-style="italic">la tensión entre ambos</text>
+        <!-- centro -->
+        <circle cx="380" cy="133" r="2" fill="rgba(200,121,65,0.3)"/>
+        <text x="380" y="128" font-family="EB Garamond,serif" font-size="12" fill="rgba(200,121,65,0.25)" text-anchor="middle" font-style="italic">choque</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- II -->
+  <section class="chapter">
+    <span class="chapter-num">II — Las tres salidas</span>
+    <h2>Ante el absurdo,<br><em>tres respuestas posibles</em></h2>
+    <p>
+      Una vez que uno reconoce el absurdo, tiene que hacer algo con él. Camus identificó tres respuestas posibles. Las dos primeras le parecían formas de cobardía intelectual. La tercera, la única honesta.
+    </p>
+
+    <div class="salidas">
+      <div class="salida">
+        <span class="salida-num">I</span>
+        <span class="salida-tag">Salida falsa</span>
+        <h3>El suicidio físico</h3>
+        <p>Eliminar al ser que hace las preguntas. Para Camus, no resuelve nada — solo corta la tensión sin comprenderla. Es rendirse antes de pelear.</p>
+      </div>
+      <div class="salida">
+        <span class="salida-num">II</span>
+        <span class="salida-tag">Salida falsa</span>
+        <h3>El salto de fe</h3>
+        <p>Inventar una respuesta donde no la hay. Religión, ideología, cualquier sistema que prometa sentido absoluto. Para Camus, es suicidio filosófico — matar la razón para dejar de sufrir.</p>
+      </div>
+      <div class="salida">
+        <span class="salida-num">III</span>
+        <span class="salida-tag">La única honesta</span>
+        <h3>La rebelión</h3>
+        <p>Mantenerse en la tensión. No resolver el absurdo — vivirlo con los ojos abiertos. Decirle sí a la vida precisamente porque no tiene garantías. Esta es la postura de Camus.</p>
+      </div>
+    </div>
+
+    <div class="inline-quote">
+      "La rebelión da valor a la vida. Extendida a lo largo de toda la existencia del hombre, le devuelve su grandeza."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Albert Camus, El hombre rebelde, 1951</small>
+    </div>
+  </section>
+
+  <!-- PULLQUOTE -->
+  <blockquote class="pullquote">
+    <div class="pullquote-bg">"</div>
+    <p>Hay que imaginarse a Sísifo feliz.</p>
+    <cite>Albert Camus — El mito de Sísifo, 1942</cite>
+  </blockquote>
+
+  <!-- III -->
+  <section class="chapter">
+    <span class="chapter-num">III — El mito</span>
+    <h2>Sísifo, el héroe<br><em>absurdo por excelencia</em></h2>
+    <p>
+      Los dioses condenaron a Sísifo a empujar una roca enorme hasta la cima de una montaña, para verla rodar hacia abajo eternamente y recomenzar. Pensaban que no había castigo más terrible que el trabajo inútil y sin esperanza.
+    </p>
+    <p>
+      Camus tomó ese mito y lo invirtió. Si Sísifo conoce su condena, si la ve con claridad, si no se engaña sobre lo que le espera — entonces <strong>es más libre que sus carceleros.</strong> La lucidez es la victoria. El reconocimiento consciente del absurdo es, paradójicamente, la forma de superarlo sin negarlo.
+    </p>
+    <p>
+      La roca es suya. La montaña es suya. Cada descenso —ese momento entre que la roca cae y Sísifo baja a recogerla— es el momento de la conciencia plena. Ese instante le pertenece por completo. Y en ese instante, Sísifo es más humano que cualquier creyente que espera recompensa.
+    </p>
+
+    <div class="rebelion">
+      <h3>El momento de la bajada</h3>
+      <p>
+        Camus detiene el relato exactamente ahí: en el descenso. Cuando Sísifo baja a buscar la roca, antes de que comience otra vez. Ese momento es el más importante — y el más ignorado.
+      </p>
+      <p>
+        En ese espacio brevísimo entre un intento y el siguiente, Sísifo es completamente libre. <strong>No hay ilusión que mantener, no hay dios al que rezar, no hay futuro que esperar.</strong> Solo él, la montaña, y la claridad absoluta sobre su situación.
+      </p>
+      <p>
+        Y Camus dice: en ese momento, Sísifo es feliz. No a pesar de su condena. Gracias a ella.
+      </p>
+    </div>
+  </section>
+
+  <!-- IV -->
+  <section class="chapter">
+    <span class="chapter-num">IV — El cruce</span>
+    <h2>Camus, Nietzsche<br>y <em>la diferencia que importa</em></h2>
+    <p>
+      Camus y Nietzsche comparten el punto de partida: no hay sentido dado, no hay Dios que garantice nada, la existencia es anterior a cualquier esencia. Pero divergen en algo fundamental — y esa divergencia define dos temperamentos filosóficos completamente distintos.
+    </p>
+    <p>
+      Nietzsche responde al vacío con <strong>creación heroica.</strong> El Übermensch, la voluntad de poder, la imposición de nuevos valores sobre las ruinas de los antiguos. Es una respuesta activa, casi violenta en su energía.
+    </p>
+    <p>
+      Camus responde con algo más tranquilo y, a su manera, más radical: <strong>la aceptación lúcida.</strong> No hay que crear nuevos valores — hay que vivir sin ellos, con alegría, en la tensión misma. No superar el absurdo sino habitarlo. No trascender sino permanecer.
+    </p>
+
+    <div class="voces">
+      <div class="voz">
+        <span class="voz-name">Friedrich Nietzsche</span>
+        <span class="voz-dates">1844 – 1900</span>
+        <p>El vacío exige creación. Si no hay valores, hay que forjarlos. La respuesta al absurdo es el sí dionisíaco a la vida — intenso, creador, exuberante. El hombre debe superarse a sí mismo.</p>
+      </div>
+      <div class="voz">
+        <span class="voz-name">Albert Camus</span>
+        <span class="voz-dates">1913 – 1960</span>
+        <p>El vacío no exige nada. Solo honestidad. Vivir sin apelación, sin esperanza de otro mundo, sin necesidad de superarse. Quedarse en la tensión y encontrar ahí — no a pesar de ella — algo que valga la pena llamar alegría.</p>
+      </div>
+      <div class="voz">
+        <span class="voz-name">Zygmunt Bauman</span>
+        <span class="voz-dates">1925 – 2017</span>
+        <p>En la modernidad líquida, el absurdo se vuelve crónico. Ya no es una crisis existencial puntual — es el clima permanente. La pregunta de Camus se vuelve cotidiana: ¿cómo vivir cuando todo fluye y nada promete?</p>
+      </div>
+      <div class="voz">
+        <span class="voz-name">Franz Kafka</span>
+        <span class="voz-dates">1883 – 1924</span>
+        <p>Antes que Camus, Kafka lo narró. El proceso, el castillo, la metamorfosis — el hombre atrapado en sistemas que no responden, que no explican, que simplemente son. El absurdo como atmósfera total, sin salida dramática.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- V -->
+  <section class="chapter">
+    <span class="chapter-num">V — La vida concreta</span>
+    <h2>El absurdo no es<br><em>una teoría. Es un lunes.</em></h2>
+    <p>
+      Lo que hace a Camus distinto de casi cualquier otro filósofo es que nunca pierde de vista lo concreto. El absurdo no vive en los libros — vive en el despertador que suena, en la reunión de trabajo que no tiene sentido, en la pregunta que uno se hace en el espejo antes de salir.
+    </p>
+    <p>
+      La respuesta camusiana a eso no es la meditación zen ni la terapia ni el antidepresivo ni la fe religiosa. Es algo más austero y más exigente: <strong>seguir, con plena conciencia de que no hay razón última para seguir, y encontrar en ese seguir mismo la única razón que existe.</strong>
+    </p>
+    <p>
+      Camus vivió lo que escribió. Creció en la pobreza en Argelia, perdió a su padre en la Primera Guerra Mundial antes de conocerlo, fue tuberculoso la mayor parte de su vida adulta, participó en la Resistencia francesa contra el nazismo. No teorizaba desde la comodidad — escribía desde adentro de la condición humana.
+    </p>
+
+    <div class="inline-quote">
+      "En medio del invierno, aprendí por fin que había en mí un verano invencible."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Albert Camus, Retorno a Tipasa, 1952</small>
+    </div>
+
+    <p>
+      Esa frase — quizás la más bella que escribió — no es optimismo barato. Es la declaración de alguien que miró el frío de frente y encontró, no calor externo, sino una fuente propia. Incandescente. Irreductible. No dada por nadie.
+    </p>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <span class="closing-glyph">☀</span>
+    <h2>El universo no responde.<br>Qué <em>libertad</em> tan extraña.</h2>
+    <p>
+      Si el cosmos no tiene nada que decirte, entonces todo lo que digas <strong>es tuyo.</strong> Cada alegría que construyas sin garantías vale más que cualquier felicidad prometida por un sistema de creencias.
+    </p>
+    <p>
+      Sísifo baja la montaña. Recoge su roca. Y algo en su postura — en la forma en que sus hombros aceptan el peso — sugiere que él sabe algo que sus carceleros nunca entenderán.
+    </p>
+    <p style="margin-top:20px;font-size:0.9rem;opacity:0.45">
+      La rebelión no es gritar contra el cielo vacío.<br>
+      Es seguir viviendo, lúcidamente, sabiendo que está vacío.
+    </p>
+  </div>
+
+  <a class="back" href="index.html">Volver al inicio</a>
+
+</main>
+
+<footer>
+  Jorge Romano &nbsp;·&nbsp; Pensamiento sin red &nbsp;·&nbsp; San Luis, Argentina
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memento Mori — Jorge Romano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#080808;--void-mid:#101010;--void-soft:#1a1a1a;--void-warm:#141210;
+  --ink:#e8e4dc;--ink-soft:rgba(232,228,220,0.58);--ink-faint:rgba(232,228,220,0.3);
+  --gold:#c4903a;--gold-light:#e8c97a;--gold-pale:rgba(196,144,58,0.1);
+  --bone:#d4cfc4;--bone-soft:rgba(212,207,196,0.4);--bone-faint:rgba(212,207,196,0.15);
+  --silver:#8a8a8a;--silver-light:#b4b4b4;
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.78;overflow-x:hidden}
+
+/* HERO — oscuridad total, luz emergiendo */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:100px 40px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-dark{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 55%,rgba(212,207,196,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 20% at 50% 80%,rgba(196,144,58,0.06) 0%,transparent 50%);
+}
+
+/* reloj de arena SVG animado */
+.hourglass-wrap{margin-bottom:40px;opacity:0.7;position:relative}
+.sand-top{animation:drain 4s ease-in-out infinite alternate}
+.sand-bot{animation:fill 4s ease-in-out infinite alternate}
+@keyframes drain{0%{d:path("M228,80 Q240,110 252,80 L252,110 Q240,125 228,110 Z")} 100%{d:path("M235,108 Q240,112 245,108 L245,110 Q240,114 235,110 Z")}}
+@keyframes fill{0%{d:path("M232,155 Q240,152 248,155 L248,160 Q240,165 232,160 Z")} 100%{d:path("M228,150 Q240,140 252,150 L252,175 Q240,185 228,175 Z")}}
+
+.hero-eyebrow{
+  font-family:var(--sans);font-size:9px;font-weight:500;
+  letter-spacing:0.28em;text-transform:uppercase;color:var(--bone-soft);
+  margin-bottom:36px;display:flex;align-items:center;gap:16px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:36px;height:1px;background:rgba(212,207,196,0.2)}
+
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.6rem,7vw,5rem);
+  font-weight:400;line-height:1.05;letter-spacing:0.04em;
+  max-width:680px;margin:0 auto 16px;
+  color:var(--bone);text-transform:uppercase;
+}
+.hero h1 em{
+  display:block;font-style:italic;font-size:0.55em;
+  text-transform:none;letter-spacing:0.02em;
+  color:rgba(212,207,196,0.45);margin-top:8px;font-family:var(--serif);
+  font-weight:400;
+}
+
+.hero-sub{
+  font-family:var(--sans);font-size:9px;letter-spacing:0.22em;
+  text-transform:uppercase;color:rgba(212,207,196,0.2);margin-bottom:40px;
+}
+.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,rgba(212,207,196,0.3),transparent);margin:0 auto 40px}
+.hero-desc{
+  font-family:var(--body);font-size:clamp(1rem,2vw,1.2rem);
+  font-style:italic;color:var(--ink-faint);max-width:520px;margin:0 auto;line-height:1.7;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(212,207,196,0.2);
+}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(212,207,196,0.2),transparent)}
+
+/* CONTENT */
+.content{max-width:760px;margin:0 auto;padding:80px 32px 120px}
+.chapter{margin-bottom:80px}
+.chapter-num{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--silver);
+  display:block;margin-bottom:12px;
+}
+.chapter h2{
+  font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.3rem);
+  font-weight:400;color:var(--ink);line-height:1.18;
+  margin-bottom:28px;letter-spacing:-0.01em;
+}
+.chapter h2 em{font-style:italic;color:var(--gold-light)}
+.chapter p{color:var(--ink-soft);margin-bottom:18px;line-height:1.78}
+.chapter p strong{color:var(--ink);font-weight:500}
+
+.inline-quote{
+  border-left:1px solid rgba(212,207,196,0.25);
+  padding:4px 0 4px 24px;margin:28px 0;
+  font-family:var(--body);font-style:italic;
+  font-size:1.05rem;color:var(--ink-faint);line-height:1.6;
+}
+
+/* VANITAS SVG */
+.vanitas-wrap{margin:40px 0;border-radius:4px;overflow:hidden;background:var(--void-mid)}
+
+/* ESTOICOS GRID */
+.estoicos{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(212,207,196,0.08);border:1px solid rgba(212,207,196,0.08);border-radius:4px;overflow:hidden;margin:32px 0}
+.estoico{background:var(--void-mid);padding:28px 22px;position:relative}
+.estoico-glyph{font-family:var(--serif);font-size:2.5rem;color:rgba(212,207,196,0.06);display:block;margin-bottom:12px;line-height:1}
+.estoico-name{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--bone);display:block;margin-bottom:3px}
+.estoico-dates{font-family:var(--sans);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--silver);opacity:0.5;display:block;margin-bottom:12px}
+.estoico p{font-size:0.85rem;color:var(--ink-faint);line-height:1.6;margin:0}
+
+/* PULLQUOTE */
+.pullquote{
+  text-align:center;padding:68px 32px;margin:72px 0;
+  border-top:1px solid rgba(212,207,196,0.1);
+  border-bottom:1px solid rgba(212,207,196,0.1);position:relative;
+}
+.pullquote-bg{
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:10rem;color:rgba(212,207,196,0.03);
+  line-height:0.8;pointer-events:none;width:100%;text-align:center;
+}
+.pullquote p{
+  font-family:var(--serif);font-size:clamp(1.2rem,3vw,1.75rem);
+  font-style:italic;font-weight:400;line-height:1.45;
+  color:var(--bone);max-width:580px;margin:0 auto 20px;position:relative;
+}
+.pullquote cite{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--silver);font-style:normal}
+
+/* DOS CULTURAS */
+.culturas{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(212,207,196,0.1);border-radius:4px;overflow:hidden;margin:32px 0}
+.cultura{padding:32px 28px}
+.cultura:first-child{border-right:1px solid rgba(212,207,196,0.1);background:var(--void-mid)}
+.cultura:last-child{background:var(--void-soft)}
+.cultura-tag{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);opacity:0.6;display:block;margin-bottom:14px}
+.cultura h3{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--bone);margin-bottom:12px;line-height:1.2}
+.cultura p{font-size:0.87rem;line-height:1.65;color:var(--ink-faint);margin:0}
+
+/* HEIDEGGER BOX */
+.heidegger{
+  background:var(--void-soft);border:1px solid rgba(212,207,196,0.1);
+  border-left:1px solid rgba(212,207,196,0.3);
+  border-radius:4px;padding:40px 36px;margin:32px 0;position:relative;overflow:hidden;
+}
+.heidegger::before{
+  content:'☽';position:absolute;right:28px;top:50%;transform:translateY(-50%);
+  font-size:6rem;color:rgba(212,207,196,0.03);line-height:1;pointer-events:none;
+}
+.heidegger h3{font-family:var(--serif);font-size:1.3rem;color:var(--bone);margin-bottom:16px;font-weight:400;font-style:italic}
+.heidegger p{font-size:0.95rem;color:var(--ink-faint);line-height:1.72;margin-bottom:12px}
+.heidegger p:last-child{margin:0}
+.heidegger strong{color:var(--ink);font-weight:500}
+
+/* EPICURO BOX */
+.epicuro{
+  background:var(--void-mid);border:1px solid rgba(212,207,196,0.08);
+  border-radius:4px;padding:36px;margin:32px 0;
+  display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+}
+.epicuro-glyph{
+  font-family:var(--serif);font-size:4rem;color:rgba(212,207,196,0.12);
+  line-height:1;flex-shrink:0;
+}
+.epicuro-text h3{font-family:var(--serif);font-size:1.15rem;font-weight:400;font-style:italic;color:var(--bone);margin-bottom:10px}
+.epicuro-text p{font-size:0.9rem;color:var(--ink-faint);line-height:1.65;margin:0}
+
+/* PRÁCTICA */
+.practicas{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(212,207,196,0.08);border:1px solid rgba(212,207,196,0.08);border-radius:4px;overflow:hidden;margin:32px 0}
+.practica{background:var(--void-mid);padding:28px 24px}
+.practica-num{
+  font-family:var(--serif);font-size:2rem;font-style:italic;
+  color:rgba(212,207,196,0.07);display:block;margin-bottom:8px;line-height:1;
+}
+.practica h3{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--bone);margin-bottom:10px;line-height:1.25}
+.practica p{font-size:0.85rem;line-height:1.65;color:var(--ink-faint);margin:0}
+
+/* CLOSING */
+.closing{text-align:center;padding:72px 32px;border-top:1px solid rgba(212,207,196,0.08);margin-top:80px}
+.closing-glyph{font-size:2.5rem;color:rgba(212,207,196,0.15);display:block;margin-bottom:28px;line-height:1}
+.closing h2{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;font-style:italic;color:var(--bone);max-width:560px;margin:0 auto 24px;line-height:1.25}
+.closing p{font-family:var(--body);font-style:italic;font-size:1.05rem;color:var(--ink-faint);max-width:480px;margin:0 auto 14px;line-height:1.7}
+.closing strong{color:var(--bone);font-weight:400}
+
+.back{display:block;text-align:center;margin-top:56px;font-family:var(--sans);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(212,207,196,0.2);text-decoration:none;transition:color 0.3s}
+.back:hover{color:var(--silver)}
+.back::before{content:'← '}
+
+footer{text-align:center;padding:36px;font-family:var(--sans);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(212,207,196,0.12);border-top:1px solid rgba(255,255,255,0.03)}
+
+@media(max-width:640px){
+  .estoicos,.practicas,.culturas{grid-template-columns:1fr}
+  .cultura:first-child{border-right:none;border-bottom:1px solid rgba(212,207,196,0.1)}
+  .epicuro{grid-template-columns:1fr}
+  .hero{padding:80px 24px 70px}
+  .content{padding:60px 20px 80px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-dark"></div>
+
+  <!-- reloj de arena animado -->
+  <div class="hourglass-wrap">
+    <svg viewBox="200 60 80 160" width="60" height="120" aria-hidden="true">
+      <defs>
+        <linearGradient id="bonegrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d4cfc4" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#d4cfc4" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+      <!-- marco -->
+      <rect x="225" y="65" width="30" height="3" rx="1" fill="rgba(212,207,196,0.3)"/>
+      <rect x="225" y="192" width="30" height="3" rx="1" fill="rgba(212,207,196,0.3)"/>
+      <line x1="226" y1="68" x2="240" y2="130" stroke="rgba(212,207,196,0.2)" stroke-width="0.8"/>
+      <line x1="254" y1="68" x2="240" y2="130" stroke="rgba(212,207,196,0.2)" stroke-width="0.8"/>
+      <line x1="226" y1="192" x2="240" y2="130" stroke="rgba(212,207,196,0.2)" stroke-width="0.8"/>
+      <line x1="254" y1="192" x2="240" y2="130" stroke="rgba(212,207,196,0.2)" stroke-width="0.8"/>
+      <!-- arena top -->
+      <path class="sand-top" d="M228,80 Q240,110 252,80 L252,110 Q240,125 228,110 Z" fill="url(#bonegrad)"/>
+      <!-- gota cayendo -->
+      <circle cx="240" cy="132" r="1.5" fill="rgba(212,207,196,0.4)">
+        <animate attributeName="cy" values="132;145;132" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0;0.5" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- arena bottom -->
+      <path class="sand-bot" d="M232,155 Q240,152 248,155 L248,160 Q240,165 232,160 Z" fill="url(#bonegrad)" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <span class="hero-eyebrow">Estoicismo · Heidegger · Epicuro · Finitud</span>
+  <h1>Memento<br>Mori<em>Recuerda que morirás</em></h1>
+  <p class="hero-sub">El pensamiento más incómodo — y el más útil</p>
+  <div class="hero-line"></div>
+  <p class="hero-desc">
+    No como amenaza. No como condena. Como la única verdad que, si se mira de frente, lo cambia todo.
+  </p>
+  <div class="hero-scroll"><div class="scroll-line"></div>Descender</div>
+</header>
+
+<main class="content">
+
+  <!-- VANITAS ILUSTRACIÓN -->
+  <div class="vanitas-wrap">
+    <svg viewBox="0 0 760 240" width="100%" role="img" aria-label="Vanitas: cráneo, reloj de arena, flor marchita y espejo — los símbolos clásicos de la fugacidad">
+      <title>Vanitas vanitatum — Todo es vanidad</title>
+      <defs>
+        <radialGradient id="vg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#1a1a1a"/>
+          <stop offset="100%" stop-color="#080808"/>
+        </radialGradient>
+      </defs>
+      <rect width="760" height="240" fill="url(#vg)"/>
+
+      <!-- cráneo — centro izquierda -->
+      <g transform="translate(140,60)" opacity="0.55">
+        <!-- cráneo simplificado y elegante -->
+        <ellipse cx="50" cy="45" rx="38" ry="35" fill="none" stroke="rgba(212,207,196,0.3)" stroke-width="0.8"/>
+        <ellipse cx="35" cy="48" rx="9" ry="10" fill="rgba(212,207,196,0.06)" stroke="rgba(212,207,196,0.2)" stroke-width="0.6"/>
+        <ellipse cx="65" cy="48" rx="9" ry="10" fill="rgba(212,207,196,0.06)" stroke="rgba(212,207,196,0.2)" stroke-width="0.6"/>
+        <path d="M40,65 Q50,68 60,65" fill="none" stroke="rgba(212,207,196,0.15)" stroke-width="0.8"/>
+        <rect x="30" y="78" width="40" height="12" rx="2" fill="none" stroke="rgba(212,207,196,0.15)" stroke-width="0.6"/>
+        <line x1="42" y1="78" x2="42" y2="90" stroke="rgba(212,207,196,0.1)" stroke-width="0.5"/>
+        <line x1="50" y1="78" x2="50" y2="90" stroke="rgba(212,207,196,0.1)" stroke-width="0.5"/>
+        <line x1="58" y1="78" x2="58" y2="90" stroke="rgba(212,207,196,0.1)" stroke-width="0.5"/>
+        <text x="50" y="125" font-family="Inter,sans-serif" font-size="8" fill="rgba(212,207,196,0.2)" text-anchor="middle" letter-spacing="3">MUERTE</text>
+      </g>
+
+      <!-- reloj de arena — centro -->
+      <g transform="translate(330,40)" opacity="0.5">
+        <rect x="20" y="0" width="40" height="4" rx="1" fill="rgba(212,207,196,0.25)"/>
+        <rect x="20" y="116" width="40" height="4" rx="1" fill="rgba(212,207,196,0.25)"/>
+        <path d="M21,4 L40,60 L59,4 Z" fill="rgba(212,207,196,0.08)" stroke="rgba(212,207,196,0.2)" stroke-width="0.6"/>
+        <path d="M21,116 L40,60 L59,116 Z" fill="rgba(212,207,196,0.05)" stroke="rgba(212,207,196,0.15)" stroke-width="0.6"/>
+        <circle cx="40" cy="60" r="1.5" fill="rgba(212,207,196,0.4)"/>
+        <text x="40" y="138" font-family="Inter,sans-serif" font-size="8" fill="rgba(212,207,196,0.2)" text-anchor="middle" letter-spacing="3">TIEMPO</text>
+      </g>
+
+      <!-- flor marchita — derecha -->
+      <g transform="translate(540,55)" opacity="0.45">
+        <line x1="35" y1="120" x2="35" y2="30" stroke="rgba(212,207,196,0.2)" stroke-width="0.8"/>
+        <ellipse cx="35" cy="30" rx="14" ry="8" fill="none" stroke="rgba(212,207,196,0.25)" stroke-width="0.6" transform="rotate(-20,35,30)"/>
+        <ellipse cx="22" cy="38" rx="12" ry="7" fill="none" stroke="rgba(212,207,196,0.18)" stroke-width="0.5" transform="rotate(30,22,38)"/>
+        <ellipse cx="48" cy="40" rx="12" ry="7" fill="none" stroke="rgba(212,207,196,0.18)" stroke-width="0.5" transform="rotate(-30,48,40)"/>
+        <ellipse cx="30" cy="50" rx="10" ry="6" fill="none" stroke="rgba(212,207,196,0.12)" stroke-width="0.5" transform="rotate(15,30,50)"/>
+        <line x1="20" y1="80" x2="35" y2="70" stroke="rgba(212,207,196,0.12)" stroke-width="0.6"/>
+        <text x="35" y="138" font-family="Inter,sans-serif" font-size="8" fill="rgba(212,207,196,0.2)" text-anchor="middle" letter-spacing="3">BELLEZA</text>
+      </g>
+
+      <!-- texto vanitas -->
+      <text x="380" y="210" font-family="EB Garamond,serif" font-size="13" fill="rgba(212,207,196,0.2)" text-anchor="middle" font-style="italic" letter-spacing="3">Vanitas vanitatum, et omnia vanitas</text>
+      <text x="380" y="228" font-family="Inter,sans-serif" font-size="9" fill="rgba(212,207,196,0.1)" text-anchor="middle" letter-spacing="2">Eclesiastés 1:2</text>
+    </svg>
+  </div>
+
+  <!-- I -->
+  <section class="chapter">
+    <span class="chapter-num">I — El origen</span>
+    <h2>Una frase romana,<br>una verdad <em>universal</em></h2>
+    <p>
+      En la antigua Roma, cuando un general victorioso desfilaba por las calles entre el fervor de la multitud, un esclavo caminaba junto a él con la única misión de susurrarle al oído, repetidamente: <em>Memento mori.</em>
+    </p>
+    <p>
+      <strong>Recuerda que morirás.</strong>
+    </p>
+    <p>
+      No como amenaza. No como crueldad. Como el antídoto más poderoso que la cultura romana conocía contra la arrogancia, el exceso y la ilusión de permanencia. El esclavo no era un augur de mal presagio — era el guardián de la lucidez del hombre que más la necesitaba en ese momento.
+    </p>
+    <p>
+      Dos mil años después, esa frase sigue siendo el pensamiento más incómodo que un ser humano puede sentarse a contemplar. Y por eso mismo, el más transformador.
+    </p>
+
+    <div class="inline-quote">
+      "Piensa en cuántas veces has postergado las cosas, cuántas oportunidades te han dado los dioses y no las has aprovechado. Es tiempo de que te des cuenta del universo del que formas parte."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Marco Aurelio, Meditaciones, siglo II d.C.</small>
+    </div>
+  </section>
+
+  <!-- II -->
+  <section class="chapter">
+    <span class="chapter-num">II — Los estoicos</span>
+    <h2>Los que aprendieron<br>a <em>morir antes de morir</em></h2>
+    <p>
+      Los estoicos fueron los filósofos que más sistemáticamente convirtieron la conciencia de la muerte en una práctica cotidiana. No como obsesión morbosa, sino como higiene mental. Como ejercicio de claridad.
+    </p>
+    <p>
+      Su premisa era simple: <strong>si practicás la muerte antes de que llegue, cuando llegue no te encontrará desprevenido.</strong> Y más importante aún — mientras tanto, vivirás con una intensidad que los que la ignoran nunca alcanzan.
+    </p>
+
+    <div class="estoicos">
+      <div class="estoico">
+        <span class="estoico-glyph">I</span>
+        <span class="estoico-name">Marco Aurelio</span>
+        <span class="estoico-dates">121 – 180 d.C.</span>
+        <p>Emperador de Roma, escribía sus meditaciones para sí mismo, sin intención de publicarlas. "Pronto estarás muerto, y aún no eres simple, ni estás libre de perturbaciones, ni sospechas que el daño puede venir de las cosas externas."</p>
+      </div>
+      <div class="estoico">
+        <span class="estoico-glyph">II</span>
+        <span class="estoico-name">Séneca</span>
+        <span class="estoico-dates">4 a.C. – 65 d.C.</span>
+        <p>Meditemos sobre la muerte todos los días, decía. No para deprimirnos, sino para vivir. El que teme a la muerte teme a la vida — porque cada momento que pasa es un pequeño morir al que le decimos adiós.</p>
+      </div>
+      <div class="estoico">
+        <span class="estoico-glyph">III</span>
+        <span class="estoico-name">Epicteto</span>
+        <span class="estoico-dates">50 – 135 d.C.</span>
+        <p>Esclavo que se convirtió en filósofo. Sabía mejor que nadie que la libertad no se encuentra en las condiciones externas sino en cómo uno responde a ellas. La muerte es una de esas condiciones — inevitable, por tanto, fuera de nuestro control.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULLQUOTE SÉNECA -->
+  <blockquote class="pullquote">
+    <div class="pullquote-bg">"</div>
+    <p>Omnia, Lucili, aliena sunt, tempus tantum nostrum est. Solo el tiempo es nuestro, Lucilio. Todo lo demás es ajeno.</p>
+    <cite>Séneca — Cartas a Lucilio, carta I</cite>
+  </blockquote>
+
+  <!-- III -->
+  <section class="chapter">
+    <span class="chapter-num">III — Epicuro</span>
+    <h2>Cuando la muerte está,<br><em>yo ya no estoy</em></h2>
+    <p>
+      Epicuro propuso el argumento más elegante y más perturbador sobre la muerte. No la enfrentó con resignación estoica ni con fe religiosa. La disolvió con lógica pura.
+    </p>
+
+    <div class="epicuro">
+      <div class="epicuro-glyph">∴</div>
+      <div class="epicuro-text">
+        <h3>El argumento de la simetría</h3>
+        <p>No estabas antes de nacer — y no sufrías. No estarás después de morir — y no sufrirás. La muerte no es algo que le ocurre a uno; es la ausencia de uno. No podés experimentar tu propia no-existencia. Por lo tanto, la muerte no es, en ningún sentido real, un mal para el que muere.</p>
+      </div>
+    </div>
+
+    <p>
+      Este argumento incomoda precisamente porque funciona. Lo que tememos no es la muerte en sí — es el proceso de morir, la pérdida de los que amamos, el olvido, la idea de que todo lo que construimos se desvanece. Esos son miedos reales y legítimos. Pero la muerte como estado — la no-existencia — es, según Epicuro, neutral por definición.
+    </p>
+    <p>
+      Y si es neutral, entonces la energía que gastamos temiéndola es energía robada a la única cosa que sí podemos experimentar: <strong>estar vivos ahora.</strong>
+    </p>
+
+    <div class="inline-quote">
+      "La muerte no es nada para nosotros. Cuando existimos, la muerte no está presente; cuando la muerte está presente, entonces nosotros no existimos."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Epicuro, Carta a Meneceo, siglo III a.C.</small>
+    </div>
+  </section>
+
+  <!-- IV -->
+  <section class="chapter">
+    <span class="chapter-num">IV — Heidegger</span>
+    <h2>Ser-para-la-muerte:<br><em>la existencia auténtica</em></h2>
+    <p>
+      Martin Heidegger llegó dos mil años después de Epicuro y propuso algo radicalmente distinto: la muerte no es un hecho biológico al final de la vida — es una <strong>estructura que define cómo vivimos ahora mismo.</strong>
+    </p>
+    <p>
+      Su concepto central es el <em>Sein-zum-Tode</em> — el ser-para-la-muerte. La idea de que el ser humano es el único ente que sabe que va a morir, y que ese saber transforma cualitativamente su relación con el tiempo y con sus posibilidades.
+    </p>
+
+    <div class="heidegger">
+      <h3>La existencia auténtica vs. la inauténtica</h3>
+      <p>
+        Heidegger distingue dos formas de existir. La <strong>existencia inauténtica</strong> es la del <em>Das Man</em> — "el uno", la gente, el promedio. Ese modo en que uno vive según lo que "se hace", "se dice", "se espera". Una existencia que evita pensar en la muerte porque eso desestabiliza el confort del rebaño.
+      </p>
+      <p>
+        La <strong>existencia auténtica</strong> surge cuando uno enfrenta su propia finitud sin escudos. Cuando se pregunta: si voy a morir, ¿qué de todo esto que hago vale realmente? ¿Qué es mío y qué simplemente adopté del Das Man sin cuestionarlo?
+      </p>
+      <p>
+        La muerte, para Heidegger, es la <em>posibilidad más propia, irreferente, cierta e indefinida.</em> Más propia porque nadie puede morir por vos. Irreferente porque cuando llegue, no importará ningún otro contexto. La muerte nos devuelve a nosotros mismos — y eso es exactamente lo que la vida cotidiana tiende a hacernos olvidar.
+      </p>
+    </div>
+
+    <div class="inline-quote">
+      "En cuanto posibilidad, la muerte le da al Dasein algo que pensar — la posibilidad de la imposibilidad de existir en absoluto."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Martin Heidegger, Ser y Tiempo, 1927</small>
+    </div>
+  </section>
+
+  <!-- V -->
+  <section class="chapter">
+    <span class="chapter-num">V — Dos culturas</span>
+    <h2>La muerte que se oculta<br>y la muerte que se <em>celebra</em></h2>
+    <p>
+      No todas las culturas tienen la misma relación con la muerte. Occidente moderno construyó una civilización diseñada para hacerla invisible — hospitales donde se muere lejos de casa, eufemismos para no nombrarla, industrias enteras dedicadas a postergar su llegada y borrar sus huellas.
+    </p>
+    <p>
+      Otras tradiciones eligieron exactamente lo contrario: hacer de la muerte una presencia cotidiana, familiar, incluso festiva.
+    </p>
+
+    <div class="culturas">
+      <div class="cultura">
+        <span class="cultura-tag">Occidente moderno</span>
+        <h3>La muerte como tabú</h3>
+        <p>Se la empuja hacia los márgenes — clínicas, funerarias, estadísticas. No se nombra en la mesa. Se disfraza con palabras como "partir" o "descansar". Resultado: una civilización con terror crónico a lo inevitable y poca capacidad para pensar en lo que realmente importa.</p>
+      </div>
+      <div class="cultura">
+        <span class="cultura-tag">México · Japón · Tibet</span>
+        <h3>La muerte como vecina</h3>
+        <p>El Día de Muertos, el <em>Libro Tibetano de los Muertos</em>, el <em>mono no aware</em> japonés — la melancolía de lo transitorio. Culturas donde la muerte no interrumpe la vida: la impregna, la tiñe de significado, le recuerda su valor a cada pétalo de cerezo que cae.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VI -->
+  <section class="chapter">
+    <span class="chapter-num">VI — La práctica</span>
+    <h2>Cómo vivir con<br>la muerte <em>encendida</em></h2>
+    <p>
+      El <em>memento mori</em> no es un ejercicio teórico. Los estoicos lo practicaban concretamente, todos los días. No como rutina depresiva, sino como calibrador de prioridades. Como lente que enfoca lo que el ruido cotidiano desenfoca.
+    </p>
+
+    <div class="practicas">
+      <div class="practica">
+        <span class="practica-num">I</span>
+        <h3>La meditación de la noche</h3>
+        <p>Séneca recomendaba, antes de dormir, repasar el día como si fuera el último. ¿Qué hice que vale? ¿Qué desperdicié? No para castigarse, sino para calibrar el día siguiente.</p>
+      </div>
+      <div class="practica">
+        <span class="practica-num">II</span>
+        <h3>El filtro de la última hora</h3>
+        <p>Antes de hacer algo — aceptar un trabajo, mantener una pelea, perseguir un objetivo — preguntarse: si supiera que muero en un año, ¿haría esto de todas formas? La respuesta suele ser reveladora.</p>
+      </div>
+      <div class="practica">
+        <span class="practica-num">III</span>
+        <h3>La inversión del tiempo</h3>
+        <p>Marco Aurelio visualizaba cuántos emperadores, filósofos y guerreros habían vivido antes que él — y ya nadie los recordaba. Eso no lo deprimía: lo liberaba de la necesidad de aprobación.</p>
+      </div>
+      <div class="practica">
+        <span class="practica-num">IV</span>
+        <h3>El amor fati camusiano</h3>
+        <p>Amar el destino — incluyendo su final. No resignación sino aceptación activa: esto es lo que hay, y dentro de esto voy a construir algo que valga la pena haber vivido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VII — SÍNTESIS -->
+  <section class="chapter">
+    <span class="chapter-num">VII — El hilo</span>
+    <h2>Nietzsche, Camus, Bauman<br>y <em>la misma pregunta</em></h2>
+    <p>
+      Todo el blog llega aquí. El nihilismo activo de Nietzsche, el absurdo de Camus, la liquidez de Bauman — son respuestas distintas a la misma pregunta de fondo que el <em>memento mori</em> formula sin rodeos: <strong>¿qué hacés con el tiempo que tenés?</strong>
+    </p>
+    <p>
+      Nietzsche responde: crea, supérate, forja valores que justifiquen haber existido. Camus responde: rebélate, vive lúcidamente, encuentra la alegría dentro de la condena. Bauman advierte: cuidado, el sistema te va a convencer de que llenar el tiempo es lo mismo que vivirlo.
+    </p>
+    <p>
+      Y el <em>memento mori</em> los une a todos en una sola frase brutal y limpia: <strong>el tiempo se acaba.</strong> No mañana. Ahora mismo, mientras lees esto, algo de vos ya no va a estar más.
+    </p>
+
+    <div class="inline-quote">
+      "Es posible vivir en la tierra como si uno fuera a estar aquí para siempre o como si pudiera morir en cualquier momento. El primero es el hombre de las multitudes; el segundo, el filósofo."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Tolstói, paráfrasis de La muerte de Iván Ilyich, 1886</small>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <span class="closing-glyph">⧖</span>
+    <h2>Morirás.<br>Qué <em>privilegio</em> tan extraño.</h2>
+    <p>
+      Solo los seres que mueren pueden amar de verdad, elegir de verdad, vivir de verdad. La inmortalidad no sería una bendición — sería el fin de toda urgencia, de toda ternura, de todo peso real en las decisiones.
+    </p>
+    <p>
+      La muerte no le da <em>sentido</em> a la vida — eso lo tiene que hacer cada uno. Pero le da algo quizás más valioso: <strong>límites.</strong> Y dentro de los límites es donde ocurre todo lo que importa.
+    </p>
+    <p style="margin-top:20px;font-size:0.9rem;opacity:0.35">
+      Memento mori.<br>
+      Recuerda que morirás.<br>
+      Y viví como si lo supieras.
+    </p>
+  </div>
+
+  <a class="back" href="index.html">Volver al inicio</a>
+
+</main>
+
+<footer>
+  Jorge Romano &nbsp;·&nbsp; Pensamiento sin red &nbsp;·&nbsp; San Luis, Argentina
+</footer>
+
+</body>
+</html>

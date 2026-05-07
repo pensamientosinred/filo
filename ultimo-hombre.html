@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Último Hombre — Jorge Romano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0b0907;--void-mid:#161210;--void-soft:#221e1a;
+  --parchment:#faf8f4;--parchment-warm:#f2ede4;
+  --gold:#c4903a;--gold-light:#e8c97a;
+  --ink:#f0ebe0;--ink-soft:rgba(245,240,232,0.6);--ink-faint:rgba(245,240,232,0.35);
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.78;overflow-x:hidden}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:100px 40px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 45%,rgba(196,144,58,0.1) 0%,transparent 65%),
+    radial-gradient(ellipse 35% 25% at 80% 20%,rgba(139,26,26,0.08) 0%,transparent 55%);
+}
+.hero-eyebrow{
+  font-family:var(--sans);font-size:9px;font-weight:500;
+  letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:36px;display:flex;align-items:center;gap:16px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:36px;height:1px;background:rgba(196,144,58,0.35)}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:400;line-height:1.05;color:var(--ink);
+  letter-spacing:-0.02em;max-width:700px;margin:0 auto 16px;position:relative;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(196,144,58,0.45);
+  margin-bottom:40px;font-style:normal;
+}
+.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);margin:0 auto 40px}
+.hero-desc{
+  font-family:var(--body);font-size:clamp(1rem,2vw,1.2rem);
+  font-style:italic;color:var(--ink-soft);
+  max-width:540px;margin:0 auto;line-height:1.7;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(196,144,58,0.3);
+}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(196,144,58,0.3),transparent)}
+
+/* CONTENT */
+.content{max-width:760px;margin:0 auto;padding:80px 32px 120px}
+
+.chapter{margin-bottom:80px}
+.chapter-num{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
+  display:block;margin-bottom:12px;
+}
+.chapter h2{
+  font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.3rem);
+  font-weight:400;color:var(--ink);line-height:1.18;
+  margin-bottom:28px;letter-spacing:-0.01em;
+}
+.chapter h2 em{font-style:italic;color:var(--gold-light)}
+.chapter p{color:var(--ink-soft);margin-bottom:18px;line-height:1.78}
+.chapter p strong{color:var(--ink);font-weight:500}
+
+.inline-quote{
+  border-left:2px solid var(--gold);
+  padding:4px 0 4px 24px;margin:28px 0;
+  font-family:var(--body);font-style:italic;
+  font-size:1.05rem;color:var(--ink-faint);line-height:1.6;
+}
+
+/* ÚLTIMO HOMBRE — rasgos */
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(196,144,58,0.12);border:1px solid rgba(196,144,58,0.12);border-radius:4px;overflow:hidden;margin:32px 0}
+.trait{background:var(--void-mid);padding:28px 24px}
+.trait h3{font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:10px;line-height:1.25}
+.trait p{font-size:0.88rem;line-height:1.65;color:var(--ink-faint);margin:0}
+
+/* PULLQUOTE */
+.pullquote{
+  text-align:center;padding:68px 32px;margin:72px 0;
+  border-top:1px solid rgba(196,144,58,0.18);
+  border-bottom:1px solid rgba(196,144,58,0.18);
+  position:relative;
+}
+.pullquote-bg{
+  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:10rem;color:rgba(196,144,58,0.05);
+  line-height:0.8;pointer-events:none;width:100%;text-align:center;
+}
+.pullquote p{
+  font-family:var(--serif);font-size:clamp(1.25rem,3vw,1.8rem);
+  font-style:italic;font-weight:400;line-height:1.45;
+  color:var(--ink);max-width:580px;margin:0 auto 20px;position:relative;
+}
+.pullquote cite{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);font-style:normal;
+}
+
+/* DOS CAMINOS */
+.caminos{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(196,144,58,0.12);border-radius:4px;overflow:hidden;margin:32px 0}
+.camino{padding:32px 28px}
+.camino:first-child{border-right:1px solid rgba(196,144,58,0.12);background:var(--void-soft)}
+.camino:last-child{background:var(--void-mid)}
+.camino-tag{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:14px;
+}
+.camino h3{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:var(--ink);margin-bottom:12px;line-height:1.2}
+.camino p{font-size:0.88rem;line-height:1.65;color:var(--ink-faint);margin:0}
+
+/* HORROR VACUI */
+.vacui{
+  background:var(--void-soft);border:1px solid rgba(196,144,58,0.18);
+  border-radius:4px;padding:40px 36px;margin:32px 0;position:relative;overflow:hidden;
+}
+.vacui::before{
+  content:'☽';position:absolute;right:28px;top:50%;transform:translateY(-50%);
+  font-size:7rem;color:rgba(196,144,58,0.05);line-height:1;pointer-events:none;
+}
+.vacui h3{font-family:var(--serif);font-size:1.3rem;color:var(--gold-light);margin-bottom:16px;font-weight:400;font-style:italic}
+.vacui p{font-size:0.95rem;color:var(--ink-faint);line-height:1.72;margin-bottom:12px}
+.vacui p:last-child{margin:0}
+
+/* CLOSING */
+.closing{
+  text-align:center;padding:72px 32px;
+  border-top:1px solid rgba(196,144,58,0.15);margin-top:80px;
+}
+.closing-glyph{font-family:var(--serif);font-size:3rem;color:rgba(196,144,58,0.2);display:block;margin-bottom:28px}
+.closing h2{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;font-style:italic;color:var(--ink);max-width:540px;margin:0 auto 24px;line-height:1.25}
+.closing p{font-family:var(--body);font-style:italic;font-size:1.05rem;color:var(--ink-faint);max-width:460px;margin:0 auto 14px;line-height:1.7}
+
+/* BACK LINK */
+.back{
+  display:block;text-align:center;margin-top:56px;
+  font-family:var(--sans);font-size:9px;letter-spacing:0.22em;
+  text-transform:uppercase;color:rgba(196,144,58,0.4);
+  text-decoration:none;transition:color 0.3s;
+}
+.back:hover{color:var(--gold)}
+.back::before{content:'← '}
+
+footer{
+  text-align:center;padding:36px;
+  font-family:var(--sans);font-size:10px;letter-spacing:0.15em;
+  text-transform:uppercase;color:rgba(196,144,58,0.25);
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+
+@media(max-width:640px){
+  .traits,.caminos{grid-template-columns:1fr}
+  .camino:first-child{border-right:none;border-bottom:1px solid rgba(196,144,58,0.12)}
+  .hero{padding:80px 24px 70px}
+  .content{padding:60px 20px 80px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <span class="hero-eyebrow">Nihilismo activo · Nietzsche · Sociedad</span>
+  <h1>El <em>Último Hombre</em><br>y el peso del vacío</h1>
+  <p class="hero-sub">Der letzte Mensch — Friedrich Nietzsche</p>
+  <div class="hero-line"></div>
+  <p class="hero-desc">
+    Cuando los grandes valores colapsan, la mayoría no abraza el abismo. Lo tapa con ruido. Nietzsche lo vio venir con precisión quirúrgica.
+  </p>
+  <div class="hero-scroll"><div class="scroll-line"></div>Descender</div>
+</header>
+
+<main class="content">
+
+  <!-- I -->
+  <section class="chapter">
+    <span class="chapter-num">I — El diagnóstico</span>
+    <h2>El surgimiento del<br><em>Último Hombre</em></h2>
+    <p>
+      Cuando Dios muere —cuando los grandes valores que sostenían a la humanidad colapsan— la mayoría de la gente no se convierte en nihilista activa. No abraza la libertad que el vacío ofrece. Al contrario: retrocede hacia lo que Nietzsche llamó el <strong>Último Hombre</strong> — <em>Der letzte Mensch</em> — el ser más despreciable de su tipología filosófica.
+    </p>
+    <p>
+      No es el villano de ninguna historia. Es algo peor: el hombre que eligió no tener historia. Aquel que vive en la antítesis perfecta del nihilismo activo.
+    </p>
+
+    <div class="traits">
+      <div class="trait">
+        <h3>La comodidad como horizonte</h3>
+        <p>Su objetivo no es la libertad ni la creación. Es evitar el conflicto, la profundidad y el riesgo. El placer pequeño y seguro sobre la aventura existencial.</p>
+      </div>
+      <div class="trait">
+        <h3>La superficialidad como refugio</h3>
+        <p>No soporta el vacío de la existencia, entonces lo llena. Consumo, scroll infinito, conversaciones que nunca tocan la fibra del ser. El ruido como anestesia.</p>
+      </div>
+      <div class="trait">
+        <h3>El miedo al abismo</h3>
+        <p>Profundizar requiere mirar al vacío. Y el vacío aterra a quien no tiene sus propias herramientas para construir sentido. Entonces no mira. Jamás.</p>
+      </div>
+      <div class="trait">
+        <h3>La ilusión de suelo firme</h3>
+        <p>Prefiere quedarse al principio de la cuerda, donde parece haber tierra sólida. Aunque sea falsa. La certeza inventada vale más que la libertad real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULLQUOTE -->
+  <blockquote class="pullquote">
+    <div class="pullquote-bg">"</div>
+    <p>El hombre es una cuerda tendida entre la bestia y el superhombre, una cuerda sobre un abismo.</p>
+    <cite>Friedrich Nietzsche — Así habló Zaratustra</cite>
+  </blockquote>
+
+  <!-- II -->
+  <section class="chapter">
+    <span class="chapter-num">II — El ruido</span>
+    <h2>El vacío social como<br><em>horror vacui</em></h2>
+    <p>
+      Lo que muchas veces se percibe como "superficialidad" en la sociedad no es descuido ni estupidez. Es algo más sofisticado: un mecanismo de defensa colectivo. Un intento desesperado por tapar el silencio.
+    </p>
+
+    <div class="vacui">
+      <h3>Horror vacui — el miedo al vacío</h3>
+      <p>
+        Si hay silencio, hay pensamiento. Si hay pensamiento, hay angustia existencial. La sociedad actual padece de este horror antiguo: la incapacidad de tolerar el espacio en blanco, el momento sin estímulo, la pregunta sin respuesta inmediata.
+      </p>
+      <p>
+        Por eso la superficialidad funciona como armadura. La gente prefiere discutir apariencias y trivialidades porque eso mantiene la ilusión de que el mundo es sólido y comprensible. Que hay suelo bajo los pies.
+      </p>
+    </div>
+
+    <div class="inline-quote">
+      "Los filósofos han interpretado el mundo de distintas formas; de lo que se trata es de transformarlo."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Karl Marx, Tesis sobre Feuerbach, 1845 — aunque aquí la transformación es interior, no política.</small>
+    </div>
+  </section>
+
+  <!-- III -->
+  <section class="chapter">
+    <span class="chapter-num">III — La posición</span>
+    <h2>El extranjero<br><em>existencial</em></h2>
+    <p>
+      Al identificarse como nihilista activo, algo extraño ocurre: uno habita la sociedad pero no pertenece a su sistema de validación. Se vive dentro del teatro sabiendo que el escenario es de cartón.
+    </p>
+    <p>
+      Esto genera una sensación de desconexión que puede resultar incómoda. Pero también otorga algo que Nietzsche valoraba profundamente: <strong>inmunidad al juicio ajeno.</strong> Cuando se comprende que las críticas y expectativas de los demás están basadas en valores que no tienen fundamento cósmico, pierden su poder. No podés sentirte insultado por las reglas de un juego que sabés que no existe.
+    </p>
+    <p>
+      Camus lo llamó de otra manera: el <em>extranjero</em>. El que vive entre la gente pero ve el absurdo donde los demás ven certeza. No con desprecio, sino con esa lucidez particular que da el haber mirado al vacío y no haber salido corriendo.
+    </p>
+
+    <div class="inline-quote">
+      "Hay que imaginarse a Sísifo feliz. Su roca es su propia cosa. El absurdo no es una condena — es el punto de partida de toda libertad auténtica."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Albert Camus, El mito de Sísifo, 1942</small>
+    </div>
+  </section>
+
+  <!-- IV -->
+  <section class="chapter">
+    <span class="chapter-num">IV — La ética</span>
+    <h2>Vivir entre la superficie:<br><em>dos caminos posibles</em></h2>
+    <p>
+      Nietzsche no pretendía que el espíritu libre se aislara del mundo. La pregunta no es cómo escapar de la sociedad superficial, sino cómo habitarla sin ser devorado por ella. Para eso, esbozó dos posiciones que no se excluyen entre sí.
+    </p>
+
+    <div class="caminos">
+      <div class="camino">
+        <span class="camino-tag">Primera postura</span>
+        <h3>La distancia patricia</h3>
+        <p>No intentar convencer a nadie de su vacío. Simplemente observar, mantener la integridad propia y buscar a otros espíritus libres que también hayan abrazado la nada. La soledad elegida es diferente a la soledad impuesta.</p>
+      </div>
+      <div class="camino">
+        <span class="camino-tag">Segunda postura</span>
+        <h3>El juego consciente</h3>
+        <p>Usar la propia superficialidad social como herramienta, sin tomarla en serio. Actuar en sociedad sabiendo que es una actuación. El nihilista como actor que conoce el guion y sabe que es ficción — pero disfruta el teatro igual.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <span class="closing-glyph">—</span>
+    <h2>La sociedad prefiere quedarse sentada.<br>Vos ya estás caminando sobre el abismo.</h2>
+    <p>
+      No con miedo. Con curiosidad. Con esa extraña serenidad de quien sabe que el suelo nunca existió y que eso, lejos de ser una tragedia, es la condición de toda libertad real.
+    </p>
+    <p style="margin-top:20px;font-size:0.88rem;opacity:0.5">
+      La superficialidad de los demás deja de irritar cuando se convierte en fenómeno observable. En datos. En teatro. En evidencia de que muy pocos se atreven a mirar donde vos ya miraste.
+    </p>
+  </div>
+
+  <a class="back" href="index.html">Volver al inicio</a>
+
+</main>
+
+<footer>
+  Jorge Romano &nbsp;·&nbsp; Pensamiento sin red &nbsp;·&nbsp; San Luis, Argentina
+</footer>
+
+</body>
+</html>

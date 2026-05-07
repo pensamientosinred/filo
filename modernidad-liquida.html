@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modernidad líquida — Jorge Romano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#08090b;--void-mid:#0f1115;--void-soft:#181c22;
+  --ink:#e8edf5;--ink-soft:rgba(232,237,245,0.6);--ink-faint:rgba(232,237,245,0.32);
+  --gold:#c4903a;--gold-light:#e8c97a;
+  --blue:#2a4a7f;--blue-light:#4a7abf;--blue-pale:rgba(42,74,127,0.18);
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.78;overflow-x:hidden}
+
+/* HERO — agua, fluido, movimiento */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:100px 40px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-water{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 100%,rgba(42,74,127,0.25) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(42,74,127,0.08) 0%,transparent 65%),
+    radial-gradient(ellipse 30% 20% at 20% 10%,rgba(196,144,58,0.06) 0%,transparent 50%);
+}
+/* ondas SVG animadas */
+.waves{position:absolute;bottom:0;left:0;right:0;height:180px;opacity:0.12}
+.wave-path{animation:wave 8s ease-in-out infinite}
+.wave-path:nth-child(2){animation-delay:-3s;opacity:0.6}
+.wave-path:nth-child(3){animation-delay:-5s;opacity:0.4}
+@keyframes wave{
+  0%,100%{d:path("M0,80 C180,40 360,120 540,80 C720,40 900,120 1080,80 L1080,180 L0,180 Z")}
+  50%{d:path("M0,100 C180,140 360,60 540,100 C720,140 900,60 1080,100 L1080,180 L0,180 Z")}
+}
+
+.hero-eyebrow{
+  font-family:var(--sans);font-size:9px;font-weight:500;
+  letter-spacing:0.28em;text-transform:uppercase;color:var(--blue-light);
+  margin-bottom:36px;display:flex;align-items:center;gap:16px;position:relative;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:36px;height:1px;background:rgba(74,122,191,0.4)}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:400;line-height:1.05;letter-spacing:-0.02em;
+  max-width:720px;margin:0 auto 16px;position:relative;
+}
+.hero h1 .solid{color:var(--ink);text-decoration:line-through;text-decoration-color:rgba(74,122,191,0.5)}
+.hero h1 em{font-style:italic;color:#7aaee8}
+.hero-sub{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(74,122,191,0.5);margin-bottom:40px;
+}
+.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--blue-light),transparent);margin:0 auto 40px}
+.hero-desc{
+  font-family:var(--body);font-size:clamp(1rem,2vw,1.2rem);
+  font-style:italic;color:var(--ink-soft);max-width:560px;margin:0 auto;line-height:1.7;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(74,122,191,0.3);
+}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(74,122,191,0.3),transparent)}
+
+/* CONTENT */
+.content{max-width:760px;margin:0 auto;padding:80px 32px 120px}
+
+.chapter{margin-bottom:80px}
+.chapter-num{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);
+  display:block;margin-bottom:12px;
+}
+.chapter h2{
+  font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.3rem);
+  font-weight:400;color:var(--ink);line-height:1.18;
+  margin-bottom:28px;letter-spacing:-0.01em;
+}
+.chapter h2 em{font-style:italic;color:#7aaee8}
+.chapter p{color:var(--ink-soft);margin-bottom:18px;line-height:1.78}
+.chapter p strong{color:var(--ink);font-weight:500}
+
+.inline-quote{
+  border-left:2px solid var(--blue-light);
+  padding:4px 0 4px 24px;margin:28px 0;
+  font-family:var(--body);font-style:italic;
+  font-size:1.05rem;color:var(--ink-faint);line-height:1.6;
+}
+
+/* ILUSTRACIÓN SVG — sólido vs líquido */
+.ilustracion{margin:40px 0;border-radius:4px;overflow:hidden;background:var(--void-soft)}
+
+/* STATES GRID */
+.states{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(74,122,191,0.1);border:1px solid rgba(74,122,191,0.1);border-radius:4px;overflow:hidden;margin:32px 0}
+.state{background:var(--void-mid);padding:28px 24px}
+.state-tag{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);opacity:0.7;display:block;margin-bottom:12px}
+.state h3{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:10px;line-height:1.25}
+.state p{font-size:0.88rem;line-height:1.65;color:var(--ink-faint);margin:0}
+
+/* PULLQUOTE */
+.pullquote{
+  text-align:center;padding:68px 32px;margin:72px 0;
+  border-top:1px solid rgba(74,122,191,0.2);
+  border-bottom:1px solid rgba(74,122,191,0.2);position:relative;
+}
+.pullquote-bg{
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:10rem;color:rgba(74,122,191,0.05);
+  line-height:0.8;pointer-events:none;width:100%;text-align:center;
+}
+.pullquote p{
+  font-family:var(--serif);font-size:clamp(1.2rem,3vw,1.75rem);
+  font-style:italic;font-weight:400;line-height:1.45;
+  color:var(--ink);max-width:580px;margin:0 auto 20px;position:relative;
+}
+.pullquote cite{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);font-style:normal}
+
+/* CRUCE BAUMAN/NIETZSCHE */
+.cruce{
+  background:var(--void-soft);border:1px solid rgba(74,122,191,0.2);
+  border-left:2px solid var(--blue-light);
+  border-radius:4px;padding:40px 36px;margin:32px 0;
+}
+.cruce h3{font-family:var(--serif);font-size:1.3rem;color:#7aaee8;margin-bottom:20px;font-weight:400;font-style:italic}
+.cruce-row{display:flex;gap:20px;margin-bottom:16px;align-items:flex-start}
+.cruce-row:last-child{margin:0}
+.cruce-author{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--blue-light);flex-shrink:0;width:90px;padding-top:3px;
+}
+.cruce-text{font-size:0.92rem;color:var(--ink-faint);line-height:1.65}
+.cruce-divider{height:1px;background:rgba(74,122,191,0.1);margin:14px 0}
+
+/* IDENTIDAD LÍQUIDA */
+.identidad{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(74,122,191,0.1);border:1px solid rgba(74,122,191,0.1);border-radius:4px;overflow:hidden;margin:32px 0}
+.id-item{background:var(--void-mid);padding:24px 20px;text-align:center}
+.id-glyph{font-size:1.8rem;display:block;margin-bottom:12px;line-height:1;opacity:0.6}
+.id-item h3{font-family:var(--serif);font-size:0.95rem;font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.id-item p{font-size:0.82rem;color:var(--ink-faint);line-height:1.55;margin:0}
+
+/* CLOSING */
+.closing{text-align:center;padding:72px 32px;border-top:1px solid rgba(74,122,191,0.15);margin-top:80px}
+.closing-glyph{font-family:var(--serif);font-size:3.5rem;color:rgba(74,122,191,0.2);display:block;margin-bottom:28px;line-height:1}
+.closing h2{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;font-style:italic;color:var(--ink);max-width:560px;margin:0 auto 24px;line-height:1.25}
+.closing p{font-family:var(--body);font-style:italic;font-size:1.05rem;color:var(--ink-faint);max-width:480px;margin:0 auto 14px;line-height:1.7}
+.closing strong{color:#7aaee8;font-weight:400}
+
+.back{display:block;text-align:center;margin-top:56px;font-family:var(--sans);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(74,122,191,0.35);text-decoration:none;transition:color 0.3s}
+.back:hover{color:var(--blue-light)}
+.back::before{content:'← '}
+
+footer{text-align:center;padding:36px;font-family:var(--sans);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(74,122,191,0.2);border-top:1px solid rgba(255,255,255,0.03)}
+
+@media(max-width:640px){
+  .states,.identidad{grid-template-columns:1fr}
+  .hero{padding:80px 24px 70px}
+  .content{padding:60px 20px 80px}
+  .cruce-row{flex-direction:column;gap:6px}
+  .cruce-author{width:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-water"></div>
+  <svg class="waves" viewBox="0 0 1080 180" preserveAspectRatio="none" aria-hidden="true">
+    <path class="wave-path" fill="#2a4a7f" d="M0,80 C180,40 360,120 540,80 C720,40 900,120 1080,80 L1080,180 L0,180 Z"/>
+    <path class="wave-path" fill="#1a3a6f" d="M0,100 C180,140 360,60 540,100 C720,140 900,60 1080,100 L1080,180 L0,180 Z"/>
+    <path class="wave-path" fill="#0f2a5f" d="M0,120 C180,100 360,140 540,120 C720,100 900,140 1080,120 L1080,180 L0,180 Z"/>
+  </svg>
+
+  <span class="hero-eyebrow">Zygmunt Bauman · Sociología · Nihilismo</span>
+  <h1>Todo lo <span class="solid">sólido</span><br>se desvanece<br>en <em>líquido</em></h1>
+  <p class="hero-sub">Modernidad líquida — Zygmunt Bauman, 2000</p>
+  <div class="hero-line"></div>
+  <p class="hero-desc">
+    Nietzsche diagnosticó la muerte de Dios. Bauman llegó cien años después a fotografiar el cadáver — y lo que creció en su lugar.
+  </p>
+  <div class="hero-scroll"><div class="scroll-line"></div>Descender</div>
+</header>
+
+<main class="content">
+
+  <!-- ILUSTRACIÓN -->
+  <div class="ilustracion">
+    <svg viewBox="0 0 760 220" width="100%" aria-label="Ilustración: lo sólido versus lo líquido en la modernidad" role="img">
+      <title>De lo sólido a lo líquido</title>
+      <defs>
+        <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a3a6f" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#0a1a3f" stop-opacity="0.8"/>
+        </linearGradient>
+      </defs>
+      <!-- fondo -->
+      <rect width="760" height="220" fill="#0f1115"/>
+      <!-- línea divisoria -->
+      <line x1="380" y1="20" x2="380" y2="200" stroke="rgba(74,122,191,0.2)" stroke-width="0.5" stroke-dasharray="4,4"/>
+      <!-- lado sólido -->
+      <rect x="60" y="60" width="120" height="100" rx="2" fill="none" stroke="rgba(232,237,245,0.25)" stroke-width="0.5"/>
+      <rect x="90" y="80" width="60" height="60" rx="1" fill="rgba(232,237,245,0.08)" stroke="rgba(232,237,245,0.2)" stroke-width="0.5"/>
+      <rect x="195" y="70" width="80" height="30" rx="1" fill="rgba(232,237,245,0.06)" stroke="rgba(232,237,245,0.15)" stroke-width="0.5"/>
+      <rect x="195" y="110" width="80" height="30" rx="1" fill="rgba(232,237,245,0.06)" stroke="rgba(232,237,245,0.15)" stroke-width="0.5"/>
+      <rect x="195" y="150" width="80" height="20" rx="1" fill="rgba(232,237,245,0.04)" stroke="rgba(232,237,245,0.1)" stroke-width="0.5"/>
+      <!-- etiqueta sólido -->
+      <text x="190" y="42" font-family="EB Garamond, serif" font-size="13" fill="rgba(232,237,245,0.35)" text-anchor="middle" font-style="italic">Modernidad sólida</text>
+      <text x="190" y="200" font-family="Inter, sans-serif" font-size="9" fill="rgba(232,237,245,0.2)" text-anchor="middle" letter-spacing="2">INSTITUCIONES · ESTADOS · IGLESIA</text>
+      <!-- lado líquido — formas onduladas -->
+      <path d="M420,90 Q450,70 480,90 Q510,110 540,90 Q570,70 600,90 Q630,110 660,90 Q690,70 700,85" fill="none" stroke="rgba(74,122,191,0.5)" stroke-width="1.5"/>
+      <path d="M420,115 Q455,135 490,115 Q525,95 560,115 Q595,135 630,115 Q660,100 700,115" fill="none" stroke="rgba(74,122,191,0.35)" stroke-width="1"/>
+      <path d="M420,140 Q460,155 500,140 Q540,125 580,140 Q620,155 660,140 Q685,130 700,138" fill="none" stroke="rgba(74,122,191,0.2)" stroke-width="0.8"/>
+      <!-- gotitas -->
+      <circle cx="440" cy="165" r="3" fill="rgba(74,122,191,0.4)"/>
+      <circle cx="520" cy="170" r="2" fill="rgba(74,122,191,0.3)"/>
+      <circle cx="610" cy="162" r="4" fill="rgba(74,122,191,0.25)"/>
+      <circle cx="680" cy="168" r="2.5" fill="rgba(74,122,191,0.35)"/>
+      <!-- etiqueta líquido -->
+      <text x="570" y="42" font-family="EB Garamond, serif" font-size="13" fill="rgba(122,174,232,0.5)" text-anchor="middle" font-style="italic">Modernidad líquida</text>
+      <text x="570" y="200" font-family="Inter, sans-serif" font-size="9" fill="rgba(74,122,191,0.35)" text-anchor="middle" letter-spacing="2">FLUJO · CONSUMO · IDENTIDAD MUTABLE</text>
+    </svg>
+  </div>
+
+  <!-- I -->
+  <section class="chapter">
+    <span class="chapter-num">I — El diagnóstico</span>
+    <h2>¿Qué significa que<br>todo sea <em>líquido?</em></h2>
+    <p>
+      Zygmunt Bauman tomó prestada una imagen de la física para describir algo que todos sentimos pero pocos podemos nombrar: vivimos en una época donde nada conserva su forma por mucho tiempo.
+    </p>
+    <p>
+      Los sólidos tienen memoria. Conservan su forma. Son predecibles. La <strong>modernidad sólida</strong> también lo era: había instituciones que duraban generaciones, identidades que se heredaban, valores que no se negociaban. El Estado, la Iglesia, la familia, el sindicato — estructuras que daban forma al caos de existir.
+    </p>
+    <p>
+      Luego llegó la <strong>modernidad líquida.</strong> Y los sólidos se derritieron. No desaparecieron — se transformaron en algo que fluye, que no puede sostenerse solo, que adopta la forma del recipiente que lo contiene. Y el problema, como señala Bauman, es que ya no hay recipientes confiables.
+    </p>
+
+    <div class="states">
+      <div class="state">
+        <span class="state-tag">Antes</span>
+        <h3>La modernidad sólida</h3>
+        <p>Instituciones duraderas. Identidades heredadas. Un trabajo para toda la vida. Una religión. Un país. Una clase social. El peso del orden como protección — y como jaula.</p>
+      </div>
+      <div class="state">
+        <span class="state-tag">Ahora</span>
+        <h3>La modernidad líquida</h3>
+        <p>Todo fluye, todo cambia, nada se sostiene. El trabajo dura años, no décadas. Las relaciones se configuran como aplicaciones. La identidad se actualiza como un perfil de red social.</p>
+      </div>
+    </div>
+
+    <div class="inline-quote">
+      "Los sólidos conservan su forma y persisten en el tiempo. Los líquidos son informes y se transforman constantemente. En la modernidad líquida, los logros individuales no pueden solidificarse en bienes duraderos."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Zygmunt Bauman, Modernidad líquida, 2000</small>
+    </div>
+  </section>
+
+  <!-- II -->
+  <section class="chapter">
+    <span class="chapter-num">II — El cruce</span>
+    <h2>Bauman y Nietzsche:<br><em>el mismo abismo, dos miradas</em></h2>
+    <p>
+      Separados por un siglo, Nietzsche y Bauman están describiendo el mismo fenómeno desde disciplinas distintas. Uno desde la filosofía, con el martillo. El otro desde la sociología, con el bisturí.
+    </p>
+
+    <div class="cruce">
+      <h3>Conversación entre siglos</h3>
+      <div class="cruce-row">
+        <span class="cruce-author">Nietzsche · 1882</span>
+        <span class="cruce-text">Dios ha muerto. El ancla metafísica de Occidente desapareció y nadie sabe qué hacer con la libertad que eso trae.</span>
+      </div>
+      <div class="cruce-divider"></div>
+      <div class="cruce-row">
+        <span class="cruce-author">Bauman · 2000</span>
+        <span class="cruce-text">Las instituciones que reemplazaron a Dios también se están disolviendo. Ya no hay ancla ninguna. Ni metafísica ni social.</span>
+      </div>
+      <div class="cruce-divider"></div>
+      <div class="cruce-row">
+        <span class="cruce-author">Nietzsche · 1883</span>
+        <span class="cruce-text">El Último Hombre llena el vacío con pequeños placeres. No tolera la profundidad. Evita el abismo a toda costa.</span>
+      </div>
+      <div class="cruce-divider"></div>
+      <div class="cruce-row">
+        <span class="cruce-author">Bauman · 2003</span>
+        <span class="cruce-text">El consumidor líquido llena el vacío con experiencias descartables. No construye, acumula. No ama, suscribe. No vive, hace scroll.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULLQUOTE -->
+  <blockquote class="pullquote">
+    <div class="pullquote-bg">"</div>
+    <p>En la modernidad líquida, la identidad se asemeja a la piel de una serpiente — algo que se muda periódicamente, no algo que se construye para siempre.</p>
+    <cite>Zygmunt Bauman — Identidad, 2005</cite>
+  </blockquote>
+
+  <!-- III -->
+  <section class="chapter">
+    <span class="chapter-num">III — La identidad</span>
+    <h2>El yo como<br><em>obra inacabada</em></h2>
+    <p>
+      Una de las consecuencias más profundas de la liquidez es lo que le ocurre a la identidad. En la modernidad sólida, la identidad era algo que se recibía: eras hijo de, pertenecías a, creías en. La identidad era una herencia, no una elección.
+    </p>
+    <p>
+      En la modernidad líquida, la identidad se convierte en un <strong>proyecto permanente e inacabable.</strong> Nunca está terminada. Siempre se puede mejorar, actualizar, reinventar. Lo que suena liberador — y en parte lo es — tiene un costo oculto: la angustia de tener que construirse a uno mismo en un terreno que no para de moverse.
+    </p>
+
+    <div class="identidad">
+      <div class="id-item">
+        <span class="id-glyph">🜄</span>
+        <h3>Identidad mutable</h3>
+        <p>Lo que hoy sos puede no tener nada que ver con lo que serás en cinco años. ¿Libertad o inestabilidad crónica?</p>
+      </div>
+      <div class="id-item">
+        <span class="id-glyph">◎</span>
+        <h3>El yo como marca</h3>
+        <p>En la era líquida, uno se construye como producto. Se optimiza para el mercado laboral, social y afectivo. El yo como CV.</p>
+      </div>
+      <div class="id-item">
+        <span class="id-glyph">⟳</span>
+        <h3>La reinvención infinita</h3>
+        <p>Nunca hay punto de llegada. Siempre hay una versión mejorada posible. La paz consigo mismo se vuelve sospechosa.</p>
+      </div>
+    </div>
+
+    <p>
+      Aquí es donde Bauman y el existencialismo se rozan de forma inesperada. Sartre decía que la existencia precede a la esencia — que uno se construye a sí mismo sin un diseño previo. Bauman respondería, desde la sociología: sí, pero cuando el piso tiembla y el contexto cambia cada cinco años, esa construcción nunca puede asentarse. El resultado no es libertad sartriana — es <strong>precariedad existencial permanente.</strong>
+    </p>
+
+    <div class="inline-quote">
+      "Los individuos de la modernidad líquida son condenados a la auto-determinación, pero carecen de los recursos para hacerlo con éxito."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Zygmunt Bauman, La sociedad sitiada, 2002</small>
+    </div>
+  </section>
+
+  <!-- IV -->
+  <section class="chapter">
+    <span class="chapter-num">IV — El amor</span>
+    <h2>El amor líquido:<br><em>conexiones sin vínculo</em></h2>
+    <p>
+      Bauman dedicó un libro entero a analizar cómo la liquidez corroe también los vínculos afectivos. El resultado es inquietante: vivimos en la era de las conexiones, pero somos incapaces de los compromisos.
+    </p>
+    <p>
+      La lógica del consumo se filtró en las relaciones humanas. Se busca la experiencia intensa sin el costo del vínculo profundo. Se desea la calidez de la conexión sin la vulnerabilidad del apego. Las aplicaciones de citas son el síntoma más visible — pero el fenómeno es más amplio y más antiguo que cualquier tecnología.
+    </p>
+    <p>
+      Cuando todo puede descartarse, nada se cultiva. Cuando el siguiente perfil es un desliz de dedo de distancia, la paciencia que requiere conocer a alguien de verdad parece un costo desproporcionado.
+    </p>
+
+    <div class="inline-quote">
+      "Las relaciones son inversiones como cualquier otra. Uno calcula los riesgos, evalúa los beneficios y mantiene siempre abierta la opción de salida."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Zygmunt Bauman, Amor líquido, 2003</small>
+    </div>
+
+    <p>
+      Aquí aparece una paradoja que Bauman señala con precisión: <strong>nunca estuvimos tan conectados y nunca nos sentimos tan solos.</strong> La liquidez de los vínculos no resuelve la soledad — la profundiza, porque la hace invisible. Uno tiene quinientos contactos y nadie a quien llamar a las tres de la madrugada.
+    </p>
+  </section>
+
+  <!-- V -->
+  <section class="chapter">
+    <span class="chapter-num">V — La respuesta</span>
+    <h2>¿Qué hace el nihilista<br>activo con la <em>liquidez?</em></h2>
+    <p>
+      Si Bauman diagnostica la enfermedad, el nihilismo activo ofrece algo que no es exactamente una cura — pero sí una postura. Una forma de pararse en el barro sin hundirse.
+    </p>
+    <p>
+      El nihilista activo no sufre la liquidez porque no esperaba solidez. No buscaba una identidad dada, una institución que lo contuviera, un dios que le diera sentido. Sabía desde el principio que el suelo era agua — y aprendió a nadar en lugar de esperar que se congele.
+    </p>
+    <p>
+      Esto no significa indiferencia. Significa algo más sofisticado: <strong>construir anclas propias, sabiendo que son provisorias.</strong> Vínculos elegidos en lugar de heredados. Valores forjados en lugar de recibidos. Una identidad que no depende del mercado porque no está en venta.
+    </p>
+
+    <div class="inline-quote">
+      "En un mundo fluido, la sabiduría no es encontrar tierra firme. Es aprender a construir balsas."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Síntesis propia, desde Bauman y el nihilismo activo</small>
+    </div>
+
+    <p>
+      Nietzsche habría dicho que el Übermensch no necesita que el mundo se solidifique para poder caminar. El nihilista activo de Bauman —si tal figura existiera— sería alguien que abraza la liquidez sin ahogarse en ella: que crea sentido no porque el mundo se lo pida, sino porque la creación misma es la respuesta al flujo.
+    </p>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <span class="closing-glyph">〰</span>
+    <h2>Todo fluye. <em>Panta rhei.</em><br>Y sin embargo, aquí estamos.</h2>
+    <p>
+      Heráclito lo dijo dos mil quinientos años antes que Bauman: nadie se baña dos veces en el mismo río. El río cambia. Uno cambia. Todo fluye.
+    </p>
+    <p>
+      La diferencia entre quien se ahoga y quien navega no es la rigidez — es la <strong>claridad sobre lo que uno elige sostener</strong> mientras todo lo demás se disuelve a su alrededor.
+    </p>
+    <p style="margin-top:20px;font-size:0.9rem;opacity:0.45">
+      En la modernidad líquida, la rebeldía más radical no es gritar contra el sistema.<br>Es construir algo que dure — aunque sea solo adentro tuyo.
+    </p>
+  </div>
+
+  <a class="back" href="index.html">Volver al inicio</a>
+
+</main>
+
+<footer>
+  Jorge Romano &nbsp;·&nbsp; Pensamiento sin red &nbsp;·&nbsp; San Luis, Argentina
+</footer>
+
+</body>
+</html>
