@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dios ha muerto — Nietzsche</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1714;--ink-light:#4a453f;--ink-faint:#9a938a;
+  --parchment:#faf8f4;--parchment-warm:#f2ede4;--parchment-deep:#e8e0d4;
+  --gold:#c4903a;--gold-light:#e8c97a;--gold-pale:#f5e9c8;
+  --void:#0e0c0a;--void-mid:#1c1814;--void-soft:#2a2420;
+  --red-dark:#8b1a1a;--red-mid:#c0392b;
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--parchment);font-family:var(--body);font-size:19px;line-height:1.78;overflow-x:hidden}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 32px;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%,rgba(139,26,26,0.18) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 30% at 50% 80%,rgba(196,144,58,0.08) 0%,transparent 60%);
+}
+.hero-lines{position:absolute;inset:0;opacity:0.04}
+.hero-lines line{stroke:#c4903a;stroke-width:0.5}
+
+.hero-eyebrow{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:32px;position:relative;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'——';color:rgba(196,144,58,0.4);margin:0 10px;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:400;font-size:clamp(2.8rem,7vw,5.5rem);
+  line-height:1.05;color:#f5f0e8;letter-spacing:-0.02em;
+  max-width:700px;margin:0 auto 24px;position:relative;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero h1 .strike{
+  position:relative;display:inline-block;
+}
+.hero h1 .strike::after{
+  content:'';position:absolute;left:0;right:0;top:50%;
+  height:2px;background:var(--red-mid);transform:translateY(-50%);
+}
+
+.hero-quote{
+  font-family:var(--body);font-size:clamp(1.1rem,2.5vw,1.4rem);
+  font-style:italic;color:rgba(245,240,232,0.5);
+  max-width:560px;margin:0 auto 16px;line-height:1.55;position:relative;
+}
+.hero-attr{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);opacity:0.7;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(196,144,58,0.4);
+}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(196,144,58,0.4),transparent)}
+
+/* MAIN CONTENT */
+.content{max-width:780px;margin:0 auto;padding:80px 32px 120px}
+
+/* CHAPTER HEADERS */
+.chapter{margin-bottom:80px}
+.chapter-num{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
+  display:block;margin-bottom:12px;
+}
+.chapter h2{
+  font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);
+  font-weight:400;color:#f0ebe0;line-height:1.18;
+  margin-bottom:28px;letter-spacing:-0.01em;
+}
+.chapter h2 em{font-style:italic;color:var(--gold-light)}
+.chapter p{color:rgba(245,240,232,0.65);margin-bottom:18px;line-height:1.78}
+.chapter p strong{color:#f0ebe0;font-weight:500}
+
+/* INLINE QUOTE */
+.inline-quote{
+  border-left:2px solid var(--gold);
+  padding:4px 0 4px 24px;margin:28px 0;
+  font-family:var(--body);font-style:italic;
+  font-size:1.05rem;color:rgba(245,240,232,0.55);line-height:1.6;
+}
+
+/* CARD GRID */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(196,144,58,0.15);border:1px solid rgba(196,144,58,0.15);border-radius:4px;overflow:hidden;margin:32px 0}
+.card{background:var(--void-mid);padding:28px 24px}
+.card-icon{font-size:1.4rem;margin-bottom:12px;display:block;line-height:1}
+.card h3{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:#f0ebe0;margin-bottom:10px;line-height:1.25}
+.card p{font-size:0.88rem;line-height:1.65;color:rgba(245,240,232,0.5);margin:0}
+
+/* METAMORPHOSES */
+.metamorphoses{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin:32px 0;position:relative}
+.metamorphoses::before{
+  content:'';position:absolute;top:50px;left:calc(33.33% - 8px);right:calc(33.33% - 8px);
+  height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);
+  z-index:0;
+}
+.meta{
+  text-align:center;padding:32px 20px;
+  border:1px solid rgba(196,144,58,0.12);background:var(--void-mid);
+  position:relative;z-index:1;
+}
+.meta:not(:last-child){border-right:none}
+.meta-glyph{
+  font-family:var(--serif);font-size:2.8rem;color:var(--gold-light);
+  display:block;line-height:1;margin-bottom:16px;opacity:0.7;
+}
+.meta-label{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:10px;
+}
+.meta h3{font-family:var(--serif);font-size:1.05rem;color:#f0ebe0;margin-bottom:10px;font-weight:400}
+.meta p{font-size:0.84rem;color:rgba(245,240,232,0.45);line-height:1.6;margin:0}
+
+/* BIG PULLQUOTE */
+.pullquote{
+  text-align:center;padding:72px 32px;margin:72px 0;
+  border-top:1px solid rgba(196,144,58,0.2);
+  border-bottom:1px solid rgba(196,144,58,0.2);
+  position:relative;
+}
+.pullquote-glyph{
+  font-family:var(--serif);font-size:10rem;line-height:0.8;
+  color:rgba(196,144,58,0.06);position:absolute;top:32px;
+  left:50%;transform:translateX(-50%);pointer-events:none;width:100%;
+}
+.pullquote p{
+  font-family:var(--serif);font-size:clamp(1.3rem,3vw,1.9rem);
+  font-style:italic;font-weight:400;line-height:1.45;
+  color:#f0ebe0;max-width:580px;margin:0 auto 20px;position:relative;
+}
+.pullquote cite{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);font-style:normal;
+}
+
+/* ETERNAL RETURN BOX */
+.eternal{
+  background:var(--void-soft);border:1px solid rgba(196,144,58,0.2);
+  border-radius:4px;padding:40px 36px;margin:32px 0;position:relative;overflow:hidden;
+}
+.eternal::before{
+  content:'∞';position:absolute;right:24px;top:50%;transform:translateY(-50%);
+  font-size:8rem;color:rgba(196,144,58,0.06);line-height:1;pointer-events:none;
+  font-family:var(--serif);
+}
+.eternal h3{
+  font-family:var(--serif);font-size:1.35rem;color:var(--gold-light);
+  margin-bottom:16px;font-weight:400;font-style:italic;
+}
+.eternal p{font-size:0.95rem;color:rgba(245,240,232,0.6);line-height:1.72;margin-bottom:12px}
+.eternal p:last-child{margin:0}
+.eternal .test{
+  margin-top:20px;padding:20px;background:rgba(196,144,58,0.07);
+  border-left:2px solid var(--gold);border-radius:2px;
+}
+.eternal .test p{font-style:italic;color:rgba(245,240,232,0.8);font-size:1rem}
+
+/* AUTHORS ROW */
+.authors{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;background:rgba(196,144,58,0.1);
+  border:1px solid rgba(196,144,58,0.1);border-radius:4px;overflow:hidden;
+  margin:32px 0;
+}
+.author{background:var(--void-mid);padding:24px 20px}
+.author-name{
+  font-family:var(--serif);font-size:1rem;font-weight:500;
+  color:#f0ebe0;display:block;margin-bottom:4px;
+}
+.author-dates{
+  font-family:var(--sans);font-size:9px;letter-spacing:0.12em;
+  color:var(--gold);opacity:0.7;display:block;margin-bottom:10px;
+  text-transform:uppercase;
+}
+.author p{font-size:0.82rem;color:rgba(245,240,232,0.45);line-height:1.55;margin:0}
+
+/* PARADOX TABLE */
+.ptable{width:100%;border-collapse:collapse;margin:28px 0;font-size:0.9rem}
+.ptable th{
+  font-family:var(--sans);font-size:9px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(196,144,58,0.6);padding:10px 16px;text-align:left;
+  border-bottom:1px solid rgba(196,144,58,0.15);
+}
+.ptable td{
+  padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.04);
+  vertical-align:top;line-height:1.55;color:rgba(245,240,232,0.55);
+}
+.ptable td:first-child{
+  font-family:var(--body);font-style:italic;color:rgba(245,240,232,0.8);
+  font-size:0.95rem;font-weight:500;
+}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:hover td{background:rgba(196,144,58,0.04)}
+
+/* CLOSING */
+.closing{
+  text-align:center;padding:80px 32px;border-top:1px solid rgba(196,144,58,0.15);
+  margin-top:80px;
+}
+.closing-glyph{
+  font-family:var(--serif);font-size:3.5rem;color:rgba(196,144,58,0.25);
+  display:block;margin-bottom:32px;line-height:1;
+}
+.closing h2{
+  font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.2rem);
+  font-weight:400;color:#f0ebe0;line-height:1.25;
+  max-width:560px;margin:0 auto 24px;
+}
+.closing p{
+  font-family:var(--body);font-style:italic;
+  font-size:1.05rem;color:rgba(245,240,232,0.5);
+  max-width:480px;margin:0 auto 12px;line-height:1.7;
+}
+.closing p strong{color:var(--gold-light);font-weight:400}
+
+footer{
+  text-align:center;padding:36px;
+  font-family:var(--sans);font-size:10px;letter-spacing:0.15em;
+  color:rgba(196,144,58,0.3);text-transform:uppercase;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+
+@media(max-width:640px){
+  .metamorphoses{grid-template-columns:1fr}
+  .meta:not(:last-child){border-right:1px solid rgba(196,144,58,0.12);border-bottom:none}
+  .hero h1{font-size:2.4rem}
+  .content{padding:60px 20px 80px}
+  .metamorphoses::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-lines" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%" preserveAspectRatio="xMidYMid slice">
+    <line x1="0" y1="30%" x2="100%" y2="30%"/><line x1="0" y1="70%" x2="100%" y2="70%"/>
+    <line x1="20%" y1="0" x2="20%" y2="100%"/><line x1="80%" y1="0" x2="80%" y2="100%"/>
+  </svg>
+
+  <span class="hero-eyebrow">Nietzsche · La Gaya Ciencia · 1882</span>
+
+  <h1>
+    <span class="strike">Dios</span> ha muerto.<br>
+    Y nosotros lo hemos <em>matado.</em>
+  </h1>
+
+  <p class="hero-quote">
+    "¿Cómo podremos consolarnos, asesinos entre los asesinos?<br>
+    Lo más sagrado y poderoso que poseía el mundo hasta ahora<br>se ha desangrado bajo nuestros cuchillos."
+  </p>
+  <span class="hero-attr">Friedrich Nietzsche — El hombre loco, §125</span>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Descender
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="content">
+
+  <!-- DIAGNÓSTICO -->
+  <section class="chapter">
+    <span class="chapter-num">I — El diagnóstico</span>
+    <h2>No una celebración.<br>Un <em>diagnóstico.</em></h2>
+    <p>
+      Cuando Nietzsche escribió estas palabras, no estaba celebrando nada. Estaba siendo el médico que le dice al paciente lo que nadie más se atreve a decirle. <strong>Dios no murió esa mañana:</strong> llevaba siglos muriéndose, lentamente, bajo el bisturí de la ciencia, la razón y el escepticismo moderno.
+    </p>
+    <p>
+      Lo que Nietzsche diagnostica no es la inexistencia de Dios — eso le importaba menos. Lo que le preocupa es la <strong>consecuencia cultural</strong> de ese vacío: si el ancla se rompe, ¿qué sostiene al barco?
+    </p>
+    <div class="inline-quote">
+      "El hombre que perdió al sol busca la luz con una linterna a mediodía — no porque esté ciego, sino porque aún no sabe que ahora la luz sale de adentro."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Paráfrasis del §125, La Gaya Ciencia</small>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">☀</span>
+        <h3>Dios como centro de gravedad</h3>
+        <p>La moral, la ley, el propósito y la verdad orbitaban a su alrededor. Al desaparecer él, todo el sistema solar de valores queda sin sol.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚗</span>
+        <h3>El asesino es la razón</h3>
+        <p>No fue el ateísmo militante. Fue Copérnico, Galileo, Darwin, Hume. La ciencia no refutó a Dios directamente — le quitó el trabajo.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">❄</span>
+        <h3>El frío del vacío</h3>
+        <p>Nietzsche describe un "frío" y oscuridad. No es poesía: es el mareo existencial de una civilización que perdió su norte de 2000 años.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSUELO -->
+  <section class="chapter">
+    <span class="chapter-num">II — El consuelo</span>
+    <h2>No necesitamos <em>consuelo.</em><br>Necesitamos creación.</h2>
+    <p>
+      La pregunta de Nietzsche —<em>¿cómo podremos consolarnos?</em>— es en realidad una trampa elegante. El nihilismo pasivo cae en ella: se sienta a llorar la pérdida. El nihilismo activo la ve como lo que es: <strong>una pregunta mal formulada.</strong>
+    </p>
+    <p>
+      El consuelo es para quien se siente víctima de una pérdida. Pero si Dios ha muerto y su trono queda vacío, el nihilista activo no llora — <strong>hereda.</strong>
+    </p>
+
+    <blockquote class="pullquote">
+      <div class="pullquote-glyph">"</div>
+      <p>El que tiene un porqué para vivir puede soportar casi cualquier cómo.</p>
+      <cite>Viktor Frankl — El hombre en busca de sentido, 1946</cite>
+    </blockquote>
+
+    <p>
+      Frankl llegó a esta conclusión desde Auschwitz — el lugar más extremo donde el universo demostró su indiferencia. Y aun así concluyó que el sentido <strong>no se encuentra: se construye.</strong> Nietzsche lo había intuido cincuenta años antes desde el lado opuesto: no desde el horror, sino desde la grandeza posible.
+    </p>
+  </section>
+
+  <!-- METAMORFOSIS -->
+  <section class="chapter">
+    <span class="chapter-num">III — Las tres metamorfosis</span>
+    <h2>El mapa de la <em>transformación</em></h2>
+    <p>
+      En <em>Así habló Zaratustra</em>, Nietzsche traza la ruta de evolución del espíritu humano tras la caída de los valores impuestos. No es filosofía abstracta — es un mapa de viaje existencial.
+    </p>
+
+    <div class="metamorphoses">
+      <div class="meta">
+        <span class="meta-glyph">🐪</span>
+        <span class="meta-label">Primera metamorfosis</span>
+        <h3>El Camello</h3>
+        <p>Carga el peso de los "tú debes". La tradición, la religión, la aprobación ajena. Cree que soportar le da valor. Vive de rodillas.</p>
+      </div>
+      <div class="meta">
+        <span class="meta-glyph">🦁</span>
+        <span class="meta-label">Segunda metamorfosis</span>
+        <h3>El León</h3>
+        <p>Ruge "Yo quiero" y rompe las cadenas. Mata al dragón del deber. Conquista su libertad. Pero todavía pelea — todavía necesita al enemigo.</p>
+      </div>
+      <div class="meta">
+        <span class="meta-glyph">🧒</span>
+        <span class="meta-label">Tercera metamorfosis</span>
+        <h3>El Niño</h3>
+        <p>Ya olvidó a Dios. No pelea ni obedece. Solo crea. Es un juego sagrado, una rueda que gira sola. El sentido como acto puro de creación.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px">
+      La mayoría de los hombres mueren como camellos. Algunos se convierten en leones y se quedan ahí, peleando eternamente contra sombras. <strong>El niño es el destino raro.</strong> El que no necesita rebelarse porque ya no hay nada contra qué hacerlo.
+    </p>
+  </section>
+
+  <!-- VERDAD -->
+  <section class="chapter">
+    <span class="chapter-num">IV — La verdad</span>
+    <h2>De la <em>Verdad</em> a las verdades</h2>
+    <p>
+      Con Dios muere también la Verdad con mayúscula — esa certeza cómoda de que existe una respuesta correcta para todo, escrita en algún lugar del cosmos.
+    </p>
+    <p>
+      Lo que queda son <strong>verdades en minúscula:</strong> perspectivas, interpretaciones, mapas del territorio que nunca son el territorio mismo. Esta idea —que Nietzsche llamó <em>perspectivismo</em>— tiene un filo cortante: ya no podés rendirle cuentas a ningún código eterno. La única explicación válida es la que vos te das a vos mismo.
+    </p>
+    <div class="inline-quote">
+      "No hay hechos, solo interpretaciones."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Nietzsche, Fragmentos póstumos</small>
+    </div>
+    <p>
+      Camus llevaría esto más lejos desde el existencialismo: si el universo es absurdo —si no responde a nuestras preguntas de sentido— la única respuesta digna es la <strong>rebelión creadora.</strong> No resignación, no suicidio filosófico, sino decirle "sí" a la vida precisamente porque carece de garantías.
+    </p>
+    <div class="inline-quote">
+      "Hay que imaginarse a Sísifo feliz."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Albert Camus, El mito de Sísifo, 1942</small>
+    </div>
+  </section>
+
+  <!-- ETERNO RETORNO -->
+  <section class="chapter">
+    <span class="chapter-num">V — La prueba de fuego</span>
+    <h2>El eterno retorno:<br><em>¿Dirías que sí?</em></h2>
+    <p>
+      Nietzsche propuso el experimento mental más exigente de la historia de la filosofía. No es una teoría cosmológica — es una navaja para medir la autenticidad de tu existencia.
+    </p>
+
+    <div class="eternal">
+      <h3>El pensamiento del eterno retorno</h3>
+      <p>
+        Imagina que un demonio te visita en tu momento de mayor soledad y te dice: <em>"Esta vida que has vivido, tendrás que vivirla otra vez, e innumerables veces más. Cada dolor, cada alegría, cada pensamiento, cada suspiro — todo volverá en el mismo orden y secuencia."</em>
+      </p>
+      <p>
+        ¿Te arrojarías al suelo maldiciendo al demonio? ¿O habrías vivido de tal manera que podrías responderle: <em>"Eres un dios y nunca oí nada más divino"?</em>
+      </p>
+      <div class="test">
+        <p>Si podés decir <strong>"¡Sí!"</strong> a esa idea, has superado el nihilismo. Significa que no vivís esperando una recompensa futura — que el valor de tu vida está en el presente mismo. Si no hay un "más allá", este "aquí" se vuelve infinitamente valioso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUNTAD DE PODER -->
+  <section class="chapter">
+    <span class="chapter-num">VI — El autogobierno</span>
+    <h2>La voluntad de poder<br>mal <em>comprendida</em></h2>
+    <p>
+      Pocos conceptos de Nietzsche fueron más tergiversados. La <em>Wille zur Macht</em> —voluntad de poder— no tiene nada que ver con dominar a otros, con la violencia o con el fascismo (que la usurpó históricamente de forma vergonzosa).
+    </p>
+    <p>
+      Para el nihilista activo, significa algo más íntimo y exigente: <strong>dominarse a uno mismo.</strong> Si el universo no tiene leyes morales naturales, vos te convertís en tu propio legislador. No libertad <em>de</em> algo (libertad negativa), sino libertad <em>para</em> algo (libertad positiva).
+    </p>
+
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Versión distorsionada</th>
+          <th>Versión real (nihilismo activo)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Voluntad de poder</td>
+          <td>Dominar, controlar, someter a otros</td>
+          <td>Soberanía sobre uno mismo; ser el arquitecto de tu propia ética</td>
+        </tr>
+        <tr>
+          <td>Übermensch</td>
+          <td>Raza superior, héroe político</td>
+          <td>El individuo que crea sus propios valores sin necesitar aprobación cósmica</td>
+        </tr>
+        <tr>
+          <td>Más allá del bien y del mal</td>
+          <td>Amoralidad, hacer lo que uno quiera</td>
+          <td>Cuestionar si los valores heredados son realmente tuyos o solo te fueron dados</td>
+        </tr>
+        <tr>
+          <td>Nihilismo</td>
+          <td>Depresión, apatía, nihilismo pasivo</td>
+          <td>Punto de partida para construir sentido propio sin depender de garantías externas</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- VOCES QUE RESONARON -->
+  <section class="chapter">
+    <span class="chapter-num">VII — Las voces que resonaron</span>
+    <h2>Los que dialogaron<br>con el <em>abismo</em></h2>
+    <p>Nietzsche no habló solo. Varios pensadores antes y después tocaron el mismo nervio desde distintos ángulos:</p>
+
+    <div class="authors">
+      <div class="author">
+        <span class="author-name">Arthur Schopenhauer</span>
+        <span class="author-dates">1788 – 1860</span>
+        <p>El mundo como voluntad ciega e irracional. Nietzsche lo leyó de joven y luego lo refutó: donde Schopenhauer vio la solución en la negación de la vida, Nietzsche eligió el sí radical.</p>
+      </div>
+      <div class="author">
+        <span class="author-name">Fiódor Dostoievski</span>
+        <span class="author-dates">1821 – 1881</span>
+        <p>"Si Dios no existe, todo está permitido." Ivan Karamazov lo formuló como pesadilla — Nietzsche lo leyó como oportunidad. Ambos tenían razón; diferían en el temperamento.</p>
+      </div>
+      <div class="author">
+        <span class="author-name">Albert Camus</span>
+        <span class="author-dates">1913 – 1960</span>
+        <p>El absurdo como condición permanente: el universo calla ante nuestras preguntas. Respuesta: rebelión creadora. No suicidio ni fe ciega — sino vivir <em>a pesar de</em> y <em>por eso mismo.</em></p>
+      </div>
+      <div class="author">
+        <span class="author-name">Jean-Paul Sartre</span>
+        <span class="author-dates">1905 – 1980</span>
+        <p>"La existencia precede a la esencia." Llegamos al mundo sin manual. Eso no es tragedia — es responsabilidad total. Somos condenados a ser libres.</p>
+      </div>
+      <div class="author">
+        <span class="author-name">Emil Cioran</span>
+        <span class="author-dates">1911 – 1995</span>
+        <p>El nihilismo llevado a su expresión más oscura y hermosa. Rumano exiliado en París, escribió aforismos que arden. "Solo pierdo el tiempo que no pierdo."</p>
+      </div>
+      <div class="author">
+        <span class="author-name">Viktor Frankl</span>
+        <span class="author-dates">1905 – 1997</span>
+        <p>Desde el horror de los campos nazis, descubrió que el sentido no se encuentra — se decide. La respuesta al vacío no es la resignación, sino la elección activa de significado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARADOJA FINAL -->
+  <section class="chapter">
+    <span class="chapter-num">VIII — La paradoja</span>
+    <h2>El peso de la<br><em>libertad total</em></h2>
+    <p>
+      Ser un nihilista activo conlleva una responsabilidad que pocos se atreven a cargar. Al no tener un manual de instrucciones —ni Biblia, ni mandato familiar, ni código moral heredado— el éxito o el fracaso de tu sentido de vida depende <strong>cien por ciento de vos.</strong>
+    </p>
+    <p>
+      Eso aterra a la mayoría. Por eso la mayoría prefiere el guion ajeno: es más cómodo equivocarse siguiendo reglas de otros que acertar construyendo las propias.
+    </p>
+    <p>
+      El nihilista activo es, al mismo tiempo, el guionista, el director y el protagonista de una obra que no tiene que gustarle a nadie más que a él. <strong>Eso es la soberanía.</strong> Y la soberanía tiene un precio: ya no hay a quién culpar.
+    </p>
+
+    <div class="inline-quote">
+      "El hombre está condenado a ser libre. Porque una vez arrojado al mundo, es responsable de todo lo que hace."<br>
+      <small style="opacity:0.6;font-size:0.85rem">— Jean-Paul Sartre, El existencialismo es un humanismo, 1946</small>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <span class="closing-glyph">†</span>
+    <h2>Dios ha muerto.<br>Qué silencio tan <em>hermoso.</em></h2>
+    <p>
+      En ese silencio, sin eco divino que devuelva nuestras preguntas, algo curioso ocurre: <strong>nuestra propia voz</strong> resuena por primera vez.
+    </p>
+    <p>
+      No hay decoraciones impuestas. El escenario está vacío. Y vos tenés el pincel.
+    </p>
+    <p style="margin-top:24px;font-size:0.85rem;opacity:0.4">
+      El nihilismo no es el fin del camino.<br>Es el principio del tuyo.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  Reflexiones filosóficas &nbsp;·&nbsp; Nietzsche, el nihilismo y la libertad radical
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Qué significa ser nihilista?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1714;
+    --ink-light: #4a453f;
+    --ink-faint: #9a938a;
+    --parchment: #faf8f4;
+    --parchment-warm: #f2ede4;
+    --gold: #c4903a;
+    --gold-light: #e8c97a;
+    --void: #141210;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'EB Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 19px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* === HERO === */
+  .hero {
+    background: var(--void);
+    color: var(--parchment);
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(196,144,58,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #f5f0e8;
+    max-width: 720px;
+    margin: 0 auto 32px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: var(--body);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: rgba(245, 240, 232, 0.55);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 48px auto 0;
+  }
+
+  /* === LAYOUT === */
+  .content {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 70px 32px 100px;
+  }
+
+  /* === LEAD === */
+  .lead {
+    font-family: var(--body);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--ink-light);
+    line-height: 1.7;
+    border-left: 2px solid var(--gold);
+    padding-left: 24px;
+    margin-bottom: 56px;
+  }
+
+  .lead strong {
+    font-weight: 500;
+    color: var(--ink);
+    font-style: normal;
+  }
+
+  /* === ETYMOLOGY BOX === */
+  .etym {
+    background: var(--void);
+    color: var(--parchment-warm);
+    border-radius: 4px;
+    padding: 32px 36px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .etym-word {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .etym-def {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.65);
+    letter-spacing: 0.02em;
+  }
+
+  .etym-def strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--parchment-warm);
+    font-weight: 400;
+    font-family: var(--body);
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+
+  /* === SECTIONS === */
+  .section { margin-bottom: 72px; }
+
+  .section-num {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: 1.85rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .section p {
+    color: var(--ink-light);
+    margin-bottom: 16px;
+  }
+
+  /* === PILLAR CARDS === */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .pillar {
+    background: var(--parchment-warm);
+    border: 1px solid rgba(196,144,58,0.2);
+    border-top: 2px solid var(--gold);
+    border-radius: 2px;
+    padding: 24px;
+  }
+
+  .pillar h3 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .pillar p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    margin: 0;
+  }
+
+  /* === VARIANTS === */
+  .variants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(26,23,20,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 28px;
+  }
+
+  .variant {
+    padding: 32px 28px;
+  }
+
+  .variant:first-child {
+    border-right: 1px solid rgba(26,23,20,0.12);
+    background: var(--void);
+    color: var(--parchment-warm);
+  }
+
+  .variant:last-child {
+    background: var(--parchment-warm);
+    color: var(--ink);
+  }
+
+  .variant-tag {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .variant:first-child .variant-tag { color: var(--gold); }
+  .variant:last-child .variant-tag { color: var(--gold); }
+
+  .variant h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .variant:first-child h3 { color: #f5f0e8; }
+  .variant:last-child h3 { color: var(--ink); }
+
+  .variant p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .variant:first-child p { color: rgba(245,240,232,0.6); }
+  .variant:last-child p { color: var(--ink-light); }
+
+  /* === PULLQUOTE === */
+  .pullquote {
+    text-align: center;
+    padding: 56px 32px;
+    margin: 64px 0;
+    border-top: 1px solid rgba(196,144,58,0.3);
+    border-bottom: 1px solid rgba(196,144,58,0.3);
+    position: relative;
+  }
+
+  .pullquote::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 8rem;
+    color: rgba(196,144,58,0.12);
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .pullquote p {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 560px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+
+  .pullquote cite {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* === COMPARISON TABLE === */
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 28px;
+    font-size: 0.92rem;
+  }
+
+  .comparison th {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(26,23,20,0.1);
+  }
+
+  .comparison th:first-child { width: 28%; }
+
+  .comparison td {
+    padding: 16px 16px;
+    border-bottom: 1px solid rgba(26,23,20,0.07);
+    vertical-align: top;
+    line-height: 1.55;
+    color: var(--ink-light);
+  }
+
+  .comparison td:first-child {
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison tr:hover td { background: rgba(196,144,58,0.04); }
+
+  /* === CLOSING === */
+  .closing {
+    background: var(--void);
+    border-radius: 4px;
+    padding: 48px 40px;
+    text-align: center;
+    margin-top: 64px;
+  }
+
+  .closing p {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .closing p strong {
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  .closing-mark {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+    margin-top: 24px;
+    opacity: 0.6;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    border-top: 1px solid rgba(26,23,20,0.08);
+  }
+
+  @media (max-width: 600px) {
+    .pillars, .variants { grid-template-columns: 1fr; }
+    .variant:first-child { border-right: none; border-bottom: 1px solid rgba(26,23,20,0.12); }
+    .etym { flex-direction: column; gap: 16px; text-align: center; }
+    .hero { padding: 70px 24px 60px; }
+    .content { padding: 48px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="hero-label">Pensamiento Filosófico</span>
+  <h1>¿Qué significa ser <em>nihilista</em>?</h1>
+  <p class="hero-sub">Una postura que no es tristeza. Es una forma de mirar el vacío — y decidir qué hacer con él.</p>
+  <div class="hero-divider"></div>
+</header>
+
+<main class="content">
+
+  <p class="lead">
+    Ser nihilista es, en su esencia más pura, sostener la creencia de que la vida carece de un sentido, propósito o valor intrínseco. <strong>No se trata de estar triste o desanimado.</strong> Se trata de una postura filosófica profunda que cuestiona los cimientos de todo lo que consideramos importante.
+  </p>
+
+  <div class="etym">
+    <div class="etym-word">nihil</div>
+    <div class="etym-def">
+      <strong>Del latín: "nada"</strong>
+      La raíz de la palabra ya lo dice todo. No un vacío accidental, sino una nada como punto de partida. Una hoja en blanco antes de que alguien invente el lápiz.
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1 -->
+  <section class="section">
+    <span class="section-num">I</span>
+    <h2>El rechazo a los valores absolutos</h2>
+    <p>
+      Un nihilista argumenta que no existen verdades morales eternas ni deidades que nos dicten cómo vivir. El universo no tiene manual de instrucciones. Nosotros llegamos y nos encontramos con el escenario vacío.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h3>La moral como construcción</h3>
+        <p>No hay "bien" o "mal" grabado en la piedra del cosmos. Solo reglas que los humanos acordamos para poder convivir sin matarnos.</p>
+      </div>
+      <div class="pillar">
+        <h3>La existencia como azar</h3>
+        <p>No nacimos para cumplir una misión. Estamos aquí por procesos biológicos. El universo no nos esperaba, ni tampoco nos recuerda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULLQUOTE -->
+  <blockquote class="pullquote">
+    <p>Dios ha muerto. Y nosotros lo hemos matado. ¿Cómo podremos consolarnos?</p>
+    <cite>Friedrich Nietzsche — La Gaya Ciencia, 1882</cite>
+  </blockquote>
+
+  <!-- SECCIÓN 2 -->
+  <section class="section">
+    <span class="section-num">II</span>
+    <h2>Los dos grandes caminos</h2>
+    <p>
+      No todos los nihilistas terminan en el mismo lugar. La misma premisa —<em>nada tiene sentido inherente</em>— puede llevarte a dos destinos completamente distintos.
+    </p>
+
+    <div class="variants">
+      <div class="variant">
+        <span class="variant-tag">Pasivo · Pesimismo</span>
+        <h3>El nihilismo que aplasta</h3>
+        <p>Si nada importa, la vida es una carga vacía. Esta vertiente puede derivar en apatía, en la sensación de que ningún esfuerzo tiene impacto real. El universo no responde. Nadie escucha. El silencio es absoluto.</p>
+      </div>
+      <div class="variant">
+        <span class="variant-tag">Activo · Liberador</span>
+        <h3>El nihilismo que libera</h3>
+        <p>Popularizado en parte por Nietzsche: si el universo no nos dio un guion, somos libres de escribir el nuestro. La ausencia de sentido predeterminado no es una condena — es una invitación.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3 -->
+  <section class="section">
+    <span class="section-num">III</span>
+    <h2>El nihilismo optimista</h2>
+    <p>
+      Esta es la versión más moderna y, quizás, la más honesta. Su lógica es elegante en su sencillez:
+    </p>
+    <p>
+      Si el universo tiene miles de millones de años, si yo soy una fracción microscópica de su historia, si mis errores y mis miedos y las presiones sociales son polvo en el viento cósmico... entonces también lo son. No me pesan tanto.
+    </p>
+    <p>
+      <em>Puedo dedicarme a disfrutar. A ser amable. A amar. No porque el universo me lo pida, sino porque se siente bien hacerlo.</em>
+    </p>
+  </section>
+
+  <!-- COMPARATIVA -->
+  <section class="section">
+    <span class="section-num">IV</span>
+    <h2>El mapa de las diferencias</h2>
+    <p>En síntesis, así se comparan las dos grandes visiones del mundo:</p>
+
+    <table class="comparison">
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Visión tradicional</th>
+          <th>Visión nihilista</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Propósito</td>
+          <td>Dado por Dios, la naturaleza o el destino.</td>
+          <td>No existe un propósito inherente. Hay que fabricarlo o prescindir de él.</td>
+        </tr>
+        <tr>
+          <td>Moral</td>
+          <td>Basada en leyes universales, divinas o naturales.</td>
+          <td>Basada en consensos sociales o elecciones individuales.</td>
+        </tr>
+        <tr>
+          <td>El fin de la vida</td>
+          <td>Hay trascendencia, legado, continuación del alma.</td>
+          <td>Es el fin absoluto de la consciencia. Y eso está bien.</td>
+        </tr>
+        <tr>
+          <td>La libertad</td>
+          <td>Se ejerce dentro de los límites del bien y el mal.</td>
+          <td>Es total, sin red de seguridad metafísica.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CIERRE -->
+  <div class="closing">
+    <p>
+      En definitiva, ser nihilista es aceptar que el <strong>escenario de la vida está vacío</strong> de decoraciones impuestas. Lo que te deja a ti el pincel para pintar lo que quieras — o simplemente sentarte a observar el vacío con curiosidad, sin que eso te destruya.
+    </p>
+    <span class="closing-mark">∅</span>
+  </div>
+
+</main>
+
+<footer>
+  Reflexiones filosóficas &nbsp;·&nbsp; Una exploración del nihilismo
+</footer>
+
+</body>
+</html>
